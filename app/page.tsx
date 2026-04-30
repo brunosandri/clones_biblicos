@@ -3,6 +3,8 @@ import Link from "next/link";
 import { ArrowRight, BookOpen, Layers, MessageCircle, ScrollText } from "lucide-react";
 import { characters } from "@/lib/characters";
 
+export const dynamic = "force-dynamic";
+
 const principles = [
   "um mentor do seu tempo",
   "um intérprete do seu contexto",
