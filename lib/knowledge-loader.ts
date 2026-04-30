@@ -92,7 +92,31 @@ export function selectKnowledgeDocuments({
     include((_, pathName) => pathName.includes("trilha completa"));
   }
 
-  if (mentionsAny(normalizedMessage, ["tema", "doutrina", "pecado", "salvacao", "alianca", "lei", "reino", "sabedoria", "igreja", "espirito", "missao"])) {
+  if (
+    mentionsAny(normalizedMessage, [
+      "tema",
+      "doutrina",
+      "pecado",
+      "salvacao",
+      "alianca",
+      "lei",
+      "reino",
+      "sabedoria",
+      "igreja",
+      "espirito",
+      "missao",
+      "criacao",
+      "origem",
+      "mundo",
+      "terra",
+      "universo",
+      "vida",
+      "animal",
+      "animais",
+      "dinossauro",
+      "dinossauros"
+    ])
+  ) {
     include((_, pathName) => pathName.includes("matriz de temas biblicos"));
   }
 
