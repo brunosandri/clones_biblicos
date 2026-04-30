@@ -48,6 +48,66 @@ export async function loadKnowledgeDocuments(): Promise<KnowledgeDocument[]> {
   );
 }
 
+export function selectKnowledgeDocuments({
+  documents,
+  characterName,
+  userMessage
+}: {
+  documents: KnowledgeDocument[];
+  characterName: string;
+  userMessage: string;
+}) {
+  const selectedPaths = new Set<string>();
+  const normalizedCharacterName = normalize(characterName);
+  const normalizedMessage = normalize(userMessage);
+
+  const include = (match: (document: KnowledgeDocument, normalizedPath: string) => boolean) => {
+    documents.forEach((document) => {
+      const normalizedPath = normalize(document.relativePath);
+
+      if (match(document, normalizedPath)) {
+        selectedPaths.add(document.relativePath);
+      }
+    });
+  };
+
+  // Base mínima para todas as respostas.
+  include((_, pathName) => pathName.includes("personagens/0. instrucoes gerais"));
+  include((_, pathName) => pathName.includes("personagens/00. padrao de identidade geral"));
+  include((_, pathName) => pathName.includes("sistema de perguntas e respostas padrao"));
+  include((_, pathName) => pathName.includes("regras teologicas"));
+  include((_, pathName) => pathName.includes("fontes protestantes"));
+
+  // Documento específico do mentor ativo.
+  include((_, pathName) => pathName.includes("personagens/") && pathName.includes(normalizedCharacterName));
+
+  // Documentos de roteamento e segurança quando a pergunta cruza períodos/personagens.
+  if (mentionsAny(normalizedMessage, ["quem deve responder", "personagem", "mentor", "periodo", "periodo biblico"])) {
+    include((_, pathName) => pathName.includes("motor de decisao do personagem"));
+    include((_, pathName) => pathName.includes("classificador de perguntas"));
+  }
+
+  if (mentionsAny(normalizedMessage, ["cronologia", "ordem", "linha do tempo", "quando", "antes", "depois"])) {
+    include((_, pathName) => pathName.includes("cronologia biblica"));
+    include((_, pathName) => pathName.includes("trilha completa"));
+  }
+
+  if (mentionsAny(normalizedMessage, ["tema", "doutrina", "pecado", "salvacao", "alianca", "lei", "reino", "sabedoria", "igreja", "espirito", "missao"])) {
+    include((_, pathName) => pathName.includes("matriz de temas biblicos"));
+  }
+
+  if (mentionsAny(normalizedMessage, ["revelacao", "progressiva", "cumpre", "cumprimento", "cristo", "jesus", "messias", "promessa"])) {
+    include((_, pathName) => pathName.includes("mapa de revelacao progressiva"));
+  }
+
+  if (mentionsAny(normalizedMessage, ["pergunta", "faq", "resposta padrao", "como responder"])) {
+    include((_, pathName) => pathName.includes("banco de perguntas"));
+  }
+
+  const selectedDocuments = documents.filter((document) => selectedPaths.has(document.relativePath));
+  return orderSelectedDocuments(selectedDocuments, characterName).slice(0, 9);
+}
+
 export async function loadMasterPrompt() {
   const masterPromptPath = (await findMarkdownFiles(KNOWLEDGE_DIR)).find(isMasterPrompt);
 
@@ -56,4 +116,56 @@ export async function loadMasterPrompt() {
   }
 
   return fs.readFile(masterPromptPath, "utf8");
+}
+
+function normalize(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+function mentionsAny(value: string, keywords: string[]) {
+  return keywords.some((keyword) => value.includes(normalize(keyword)));
+}
+
+function orderSelectedDocuments(documents: KnowledgeDocument[], characterName: string) {
+  const normalizedCharacterName = normalize(characterName);
+
+  return [...documents].sort((first, second) => {
+    const firstScore = getPriority(first, normalizedCharacterName);
+    const secondScore = getPriority(second, normalizedCharacterName);
+
+    if (firstScore !== secondScore) {
+      return firstScore - secondScore;
+    }
+
+    return first.relativePath.localeCompare(second.relativePath);
+  });
+}
+
+function getPriority(document: KnowledgeDocument, normalizedCharacterName: string) {
+  const normalizedPath = normalize(document.relativePath);
+
+  if (normalizedPath.includes("personagens/") && normalizedPath.includes(normalizedCharacterName)) {
+    return 0;
+  }
+
+  if (normalizedPath.includes("instrucoes gerais") || normalizedPath.includes("padrao de identidade")) {
+    return 1;
+  }
+
+  if (normalizedPath.includes("sistema de perguntas e respostas padrao")) {
+    return 2;
+  }
+
+  if (normalizedPath.includes("regras teologicas") || normalizedPath.includes("fontes protestantes")) {
+    return 3;
+  }
+
+  if (normalizedPath.includes("cronologia") || normalizedPath.includes("matriz") || normalizedPath.includes("mapa")) {
+    return 4;
+  }
+
+  return 5;
 }

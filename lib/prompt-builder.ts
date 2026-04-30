@@ -34,6 +34,9 @@ ${masterPrompt}
 ## Base interna de conhecimento
 ${knowledgeBlock}
 
+## Politica de uso da base
+A base enviada foi selecionada para reduzir tokens. Use apenas estes documentos, os dados do personagem ativo e referencias biblicas seguras. Se algum detalhe nao estiver na base enviada, responda com prudencia e indique que a Biblia nao revela diretamente.
+
 ## Pergunta do usuario
 ${userMessage}
 

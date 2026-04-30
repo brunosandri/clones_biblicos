@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getCharacterById } from "@/lib/characters";
-import { loadKnowledgeDocuments, loadMasterPrompt } from "@/lib/knowledge-loader";
+import { loadKnowledgeDocuments, loadMasterPrompt, selectKnowledgeDocuments } from "@/lib/knowledge-loader";
 import { createOpenAIClient } from "@/lib/openai";
 import { buildChatPrompt } from "@/lib/prompt-builder";
 import type { ChatRequest } from "@/types";
@@ -31,7 +31,11 @@ export async function POST(request: Request) {
     const prompt = buildChatPrompt({
       masterPrompt,
       character,
-      knowledgeDocuments,
+      knowledgeDocuments: selectKnowledgeDocuments({
+        documents: knowledgeDocuments,
+        characterName: character.name,
+        userMessage: body.message
+      }),
       userMessage: body.message
     });
 
