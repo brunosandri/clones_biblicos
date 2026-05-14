@@ -132,11 +132,21 @@ export function selectKnowledgeDocuments({
   return orderSelectedDocuments(selectedDocuments, characterName).slice(0, 9);
 }
 
-export async function loadMasterPrompt() {
-  const masterPromptPath = (await findMarkdownFiles(KNOWLEDGE_DIR)).find(isMasterPrompt);
+export async function loadMasterPrompt(characterId: string) {
+  const normalizedCharacterId = normalize(characterId);
+  const masterPromptPath = (await findMarkdownFiles(KNOWLEDGE_DIR)).find((filePath) => {
+    const normalizedPath = normalize(path.relative(KNOWLEDGE_DIR, filePath).replaceAll(path.sep, "/"));
+    const normalizedFileName = normalize(path.basename(filePath));
+
+    return (
+      isMasterPrompt(filePath) &&
+      normalizedPath.includes("personagens/") &&
+      normalizedFileName.includes(normalizedCharacterId)
+    );
+  });
 
   if (!masterPromptPath) {
-    throw new Error("Master Prompt nao encontrado na pasta knowledge.");
+    throw new Error(`Master Prompt nao encontrado para o personagem: ${characterId}.`);
   }
 
   return fs.readFile(masterPromptPath, "utf8");
