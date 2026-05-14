@@ -122,8 +122,8 @@ export function ChatBox({ initialCharacterId = "jesus" }: ChatBoxProps) {
               <div>
                 <p className="text-lg font-semibold text-ink">Faça uma pergunta bíblica</p>
                 <p className="mt-2 max-w-md text-sm leading-6 text-ink/65">
-                  O mentor responderá com contexto, texto bíblico, explicação, significado teológico,
-                  aplicação, conexão bíblica e fontes recomendadas.
+                  O mentor responderá com uma conversa natural, fiel à Bíblia e coerente com sua própria
+                  voz, sem seguir um modelo fixo de seções.
                 </p>
               </div>
             </div>
