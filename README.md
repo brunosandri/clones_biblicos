@@ -25,6 +25,16 @@ Depois edite `.env.local` e configure:
 OPENAI_API_KEY=sua_chave
 OPENAI_MODEL=gpt-4o-mini
 OPENAI_WEB_MODEL=gpt-4o-mini
+AUTH_SECRET=um_segredo_longo_para_assinar_sessoes
+AUTH_EMAIL=cliente@exemplo.com
+AUTH_PASSWORD=senha_do_cliente
+AUTH_NAME=Cliente
+```
+
+Para múltiplos usuários, use `AUTH_USERS` como JSON:
+
+```bash
+AUTH_USERS=[{"email":"cliente1@exemplo.com","password":"senha1","name":"Cliente 1"},{"email":"cliente2@exemplo.com","password":"senha2","name":"Cliente 2"}]
 ```
 
 ## Rotas
@@ -50,6 +60,10 @@ Variáveis obrigatórias:
 OPENAI_API_KEY=sua_chave
 OPENAI_MODEL=gpt-4o-mini
 OPENAI_WEB_MODEL=gpt-4o-mini
+AUTH_SECRET=um_segredo_longo_para_assinar_sessoes
+AUTH_EMAIL=cliente@exemplo.com
+AUTH_PASSWORD=senha_do_cliente
+AUTH_NAME=Cliente
 ```
 
 ## Documentos internos
