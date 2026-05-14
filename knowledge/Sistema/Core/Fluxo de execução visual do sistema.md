@@ -9,7 +9,7 @@ ai_usage: Internal routing and decision rules for answer construction.
 
 ## AI_COMPACT
 - Uso: fluxo operacional do sistema.
-- Passos: entrada do usuário -> personagem selecionado -> classificação -> seleção de documentos -> construção do prompt -> resposta estruturada.
+- Passos: entrada do usuário -> personagem selecionado -> classificação -> seleção de documentos -> construção do prompt -> resposta clara e natural.
 - Decisão: se a pergunta exige outro personagem, explicar conexão sem trocar identidade ativa indevidamente.
 - Resposta final deve ser clara, bíblica, contextual e aplicada.
 
@@ -53,7 +53,7 @@ Consulta documentos:
 - Regras  
 
 ↓
-Sistema de resposta padrão
+Sistema de resposta natural
 ↓
 Resposta final
 

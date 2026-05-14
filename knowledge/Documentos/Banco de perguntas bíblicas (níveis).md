@@ -8,10 +8,10 @@ ai_usage: Known question patterns and expected answer framing.
 ---
 
 ## AI_COMPACT
-- Uso: padrões de perguntas para calibrar profundidade e formato da resposta.
+- Uso: padrões de perguntas para calibrar profundidade e estilo da resposta.
 - Níveis: fundamental = respostas simples; intermediário = contexto e relações teológicas; avançado = síntese doutrinária e revelação progressiva.
 - Regra: responder primeiro a pergunta direta; depois expandir com contexto, texto bíblico, explicação, significado teológico, aplicação, conexão bíblica e fontes.
-- Quando usar: perguntas sobre como responder, FAQ, dificuldade do usuário, formato de resposta ou exemplos de perguntas bíblicas.
+- Quando usar: perguntas sobre como responder, FAQ, dificuldade do usuário, estilo de resposta ou exemplos de perguntas bíblicas.
 - Evitar: transformar a resposta em lista genérica quando a pergunta pede uma explicação específica.
 
 ## FULL_CONTENT

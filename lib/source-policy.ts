@@ -40,7 +40,7 @@ Esta pergunta exige fontes externas porque envolve termo moderno, ciencia, arque
 
 Obrigatorio:
 - use busca web/fonte externa antes de responder;
-- cite fontes externas em "Fontes recomendadas" com titulo e URL;
+- cite fontes externas de modo natural, com titulo e URL quando usar informacao externa;
 - mantenha a Biblia como autoridade teologica;
 - use fontes externas apenas para contexto historico, linguistico, cientifico ou arqueologico;
 - nao transforme inferencia externa em doutrina biblica;

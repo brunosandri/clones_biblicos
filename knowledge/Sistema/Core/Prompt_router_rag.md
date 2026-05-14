@@ -11,7 +11,7 @@ ai_usage: Internal routing and decision rules for answer construction.
 - Uso: instruções de retrieval para selecionar documentos antes da resposta.
 - Prioridade: master prompt do personagem; regras teológicas; regras globais; documentos temáticos; cronologia; fontes; FAQ/trilha se pertinente.
 - Regra: usar documentos selecionados como contexto; não responder ignorando a base quando ela foi fornecida.
-- Saída: resposta estruturada e fiel ao personagem ativo.
+- Saída: resposta clara e natural e fiel ao personagem ativo.
 
 ## FULL_CONTENT
 
