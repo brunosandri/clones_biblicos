@@ -1,5 +1,4 @@
 Este documento organiza os principais temas bíblicos de forma estruturada, permitindo:
-
 - ensino sistemático
 - respostas consistentes
 - progressão cronológica
@@ -7,12 +6,9 @@ Este documento organiza os principais temas bíblicos de forma estruturada, perm
 - base para aplicativos e GPTs
 
 A matriz segue a tradição protestante histórica.
-
----
 # ESTRUTURA DO SISTEMA
 
 Cada tema contém:
-
 tema
 subtemas
 personagens relacionados
@@ -20,17 +16,11 @@ livros bíblicos
 nível teológico
 período histórico
 palavras-chave
-
----
-
 # TEMA 1 — DEUS
 
-Descrição:
-
-O estudo da natureza, caráter e atributos de Deus.
+Descrição: O estudo da natureza, caráter e atributos de Deus.
 
 Subtemas:
-
 existência de Deus  
 natureza de Deus  
 atributos de Deus  
@@ -58,13 +48,9 @@ Salmos
 João  
 Romanos  
 
-Nível teológico:
+Nível teológico: Fundamental
 
-Fundamental
-
-Período:
-
-Toda a Bíblia
+Período: Toda a Bíblia
 
 Palavras-chave:
 
@@ -73,58 +59,38 @@ Senhor
 Criador  
 Santo  
 Soberano  
-
----
-
 # TEMA 2 — CRIAÇÃO
 
-Descrição:
-
-O ato de Deus de criar o universo e a vida.
+Descrição: O ato de Deus de criar o universo e a vida.
 
 Subtemas:
-
 origem do universo  
 criação do homem  
 criação da mulher  
 ordem da criação  
 propósito da criação  
 
-Personagens:
-
-Adão  
+Personagens: Adão  
 
 Livros bíblicos:
-
 Gênesis 1  
 Gênesis 2  
 
-Nível:
+Nível: Fundamental
 
-Fundamental
-
-Período:
-
-Criação
+Período: Criação
 
 Palavras-chave:
-
 criação  
 origem  
 vida  
 mundo  
 homem  
-
----
-
 # TEMA 3 — PECADO
 
-Descrição:
-
-A desobediência contra Deus e suas consequências.
+Descrição: A desobediência contra Deus e suas consequências.
 
 Subtemas:
-
 queda  
 tentação  
 natureza do pecado  
@@ -134,43 +100,30 @@ morte
 corrupção  
 
 Personagens:
-
 Adão  
 Davi  
 Paulo  
 
 Livros bíblicos:
-
 Gênesis 3  
 Salmos  
 Romanos  
 
-Nível:
+Nível: Fundamental
 
-Fundamental
-
-Período:
-
-Toda a Bíblia
+Período: Toda a Bíblia
 
 Palavras-chave:
-
 pecado  
 queda  
 erro  
 desobediência  
 culpa  
-
----
-
 # TEMA 4 — SALVAÇÃO
 
-Descrição:
-
-A obra de Deus para redimir o ser humano.
+Descrição: A obra de Deus para redimir o ser humano.
 
 Subtemas:
-
 redenção  
 graça  
 fé  
@@ -205,17 +158,11 @@ graça
 fé  
 redenção  
 perdão  
-
----
-
 # TEMA 5 — ALIANÇA
 
-Descrição:
-
-O relacionamento estabelecido por Deus com seu povo.
+Descrição: O relacionamento estabelecido por Deus com seu povo.
 
 Subtemas:
-
 aliança com Noé  
 aliança com Abraão  
 aliança mosaica  
@@ -251,12 +198,54 @@ pacto
 compromisso  
 
 ---
+# TEMA 6 — FÉ E PROMESSA
 
-# TEMA 6 — LEI
+Descrição: O chamado de Deus para confiar em sua palavra, mesmo antes do cumprimento visível da promessa.
 
-Descrição:
+Subtemas:
 
-Os mandamentos dados por Deus ao seu povo.
+fé  
+obediência  
+promessa  
+aliança abraâmica  
+peregrinação  
+justificação pela fé  
+descendência prometida  
+bênção às nações  
+
+Personagens relacionados:
+
+Abraão  
+Paulo  
+Jesus  
+
+Livros bíblicos:
+
+Gênesis 12–25  
+Romanos 4  
+Gálatas 3  
+Hebreus 11  
+
+Nível teológico:
+
+Fundamental
+
+Período:
+
+Patriarcas
+
+Palavras-chave:
+
+fé  
+promessa  
+aliança  
+Abraão  
+descendência  
+terra  
+bênção  
+# TEMA 7 — LEI
+
+Descrição: Os mandamentos dados por Deus ao seu povo.
 
 Subtemas:
 
@@ -294,11 +283,9 @@ santidade
 
 ---
 
-# TEMA 7 — REINO
+# TEMA 8 — REINO
 
-Descrição:
-
-O governo de Deus sobre seu povo.
+Descrição: O governo de Deus sobre seu povo.
 
 Subtemas:
 
@@ -334,8 +321,7 @@ rei
 autoridade  
 
 ---
-
-# TEMA 8 — SABEDORIA
+# TEMA 9 — SABEDORIA
 
 Descrição:
 
@@ -374,8 +360,7 @@ discernimento
 vida  
 
 ---
-
-# TEMA 9 — ADORAÇÃO
+# TEMA 10 — ADORAÇÃO
 
 Descrição:
 
@@ -415,8 +400,7 @@ oração
 culto  
 
 ---
-
-# TEMA 10 — IGREJA
+# TEMA 11 — IGREJA
 
 Descrição:
 
@@ -457,8 +441,7 @@ corpo
 discípulos  
 
 ---
-
-# TEMA 11 — ESPÍRITO SANTO
+# TEMA 12 — ESPÍRITO SANTO
 
 Descrição:
 
@@ -499,8 +482,7 @@ dons
 presença  
 
 ---
-
-# TEMA 12 — MISSÕES
+# TEMA 13 — MISSÕES
 
 Descrição:
 
@@ -537,8 +519,7 @@ pregação
 igreja  
 
 ---
-
-# TEMA 13 — FUTURO
+# TEMA 14 — FUTURO
 
 Descrição:
 
@@ -575,28 +556,9 @@ juízo
 eternidade  
 esperança  
 
----
-
-# CLASSIFICAÇÃO DE NÍVEL
-
-Fundamental:
-
-Essencial para todos os cristãos.
-
-Intermediário:
-
-Importante para crescimento espiritual.
-
-Avançado:
-
-Estudo aprofundado e teológico.
-
----
-
 # USO NO SISTEMA
 
 Esta matriz serve como:
-
 Base do ensino  
 Índice teológico  
 Motor de respostas  

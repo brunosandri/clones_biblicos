@@ -1,18 +1,12 @@
 # LINHA DO TEMPO BÍBLICA CRONOLÓGICA
 
-Este documento organiza a história bíblica em ordem cronológica, permitindo que o estudante compreenda a revelação progressiva de Deus ao longo da história.
-
-A linha do tempo segue a tradição protestante histórica.
-
----
-
+Este documento organiza a história bíblica em ordem cronológica, permitindo que o estudante compreenda a revelação progressiva de Deus ao longo da história. A linha do tempo segue a tradição protestante histórica.
 # PERÍODO 1 — CRIAÇÃO
 
 Personagem principal:
 Adão
 
 Livros bíblicos:
-
 Gênesis 1  
 Gênesis 2  
 Gênesis 3  
@@ -38,9 +32,6 @@ Pecado
 Responsabilidade  
 Consequência  
 Redenção prometida  
-
----
-
 # PERÍODO 2 — DILÚVIO
 
 Personagem principal:
@@ -72,46 +63,38 @@ Graça
 Obediência  
 Aliança  
 Santidade  
-
----
-
 # PERÍODO 3 — PATRIARCAS
 
-Personagens principais:
+Personagem principal: Abraão
 
-Abraão  
+Personagens relacionados:
 Isaque  
 Jacó  
 José  
 
-Livros bíblicos:
-
-Gênesis 12–50  
+Livros bíblicos: Gênesis 11–50  
 
 Eventos principais:
-
-Chamado de Abraão  
-Promessa da aliança  
-Nascimento de Isaque  
-Venda de José  
-José no Egito  
-Preservação da família  
+- Chamado de Abraão  
+- Promessa da terra  
+- Promessa da descendência  
+- Aliança com Deus  
+- Nascimento de Isaque  
+- Provação no monte Moriá  
+- História de Jacó  
+- José no Egito  
 
 Temas principais:
-
 Fé  
 Promessa  
 Aliança  
+Obediência  
+Peregrinação  
 Providência  
-Confiança  
-
----
-
+Justificação pela fé 
 # PERÍODO 4 — ÊXODO E LEI
 
-Personagem principal:
-
-Moisés
+Personagem principal: Moisés
 
 Livros bíblicos:
 
@@ -138,18 +121,13 @@ Lei
 Santidade  
 Adoração  
 Obediência  
-
----
-
 # PERÍODO 5 — CONQUISTA E JUÍZES
 
 Personagens principais:
-
 Josué  
 Juízes  
 
 Livros bíblicos:
-
 Josué  
 Juízes  
 Rute  
@@ -167,13 +145,9 @@ Fidelidade
 Arrependimento  
 Disciplina  
 Dependência de Deus  
-
----
-
 # PERÍODO 6 — REINO UNIDO
 
 Personagens principais:
-
 Saul  
 Davi  
 Salomão  
@@ -205,13 +179,9 @@ Adoração
 Sabedoria  
 Liderança  
 Dependência de Deus  
-
----
-
 # PERÍODO 7 — REINO DIVIDIDO
 
 Personagens principais:
-
 Reis de Israel e Judá  
 Profetas  
 
@@ -242,9 +212,6 @@ Juízo
 Arrependimento  
 Fidelidade  
 Justiça  
-
----
-
 # PERÍODO 8 — EXÍLIO
 
 Personagens principais:
@@ -271,13 +238,9 @@ Disciplina
 Esperança  
 Restauração  
 Soberania de Deus  
-
----
-
 # PERÍODO 9 — RETORNO DO EXÍLIO
 
 Personagens principais:
-
 Esdras  
 Neemias  
 Zorobabel  
@@ -302,14 +265,9 @@ Restauração
 Obediência  
 Adoração  
 Reforma espiritual  
-
----
-
 # PERÍODO 10 — EVANGELHOS
 
-Personagem principal:
-
-Jesus Cristo
+Personagem principal: Jesus Cristo
 
 Livros bíblicos:
 
@@ -334,12 +292,9 @@ Graça
 Reino de Deus  
 Redenção  
 
----
-
 # PERÍODO 11 — IGREJA PRIMITIVA
 
 Personagens principais:
-
 Pedro  
 Paulo  
 Apóstolos  
@@ -363,13 +318,9 @@ Missões
 Doutrina  
 Santificação  
 
----
-
 # PERÍODO 12 — FUTURO
 
-Livro bíblico:
-
-Apocalipse  
+Livro bíblico: Apocalipse  
 
 Eventos principais:
 

@@ -9,20 +9,14 @@ seminários
 faculdades teológicas  
 formação pastoral  
 discipulado  
-
----
-
 # BÍBLIA
-
 Versões recomendadas:
-
 Almeida Revista e Corrigida (ARC)  
 Almeida Revista e Atualizada (ARA)  
 Nova Versão Internacional (NVI)  
 English Standard Version (ESV)  
 
 ---
-
 # COMENTÁRIOS BÍBLICOS
 
 ## Clássicos
@@ -78,7 +72,6 @@ Bruce Shelley — História da Igreja
 Mark Noll — História do Cristianismo  
 
 ---
-
 # ESTUDOS SOBRE JESUS
 
 John Stott  
@@ -87,15 +80,12 @@ F. F. Bruce
 N. T. Wright  
 
 ---
-
 # ESTUDOS SOBRE PAULO
-
 Thomas Schreiner  
 Douglas Moo  
 John Stott  
 
 ---
-
 # ESTUDOS SOBRE O ANTIGO TESTAMENTO
 
 Bruce Waltke  
@@ -104,18 +94,15 @@ Tremper Longman
 Walter Kaiser  
 
 ---
-
 # PRINCÍPIO DE USO
 
 As fontes devem ser:
-
 respeitadas  
 ortodoxas  
 biblicamente fundamentadas  
 teologicamente responsáveis  
 
 Evitar:
-
 doutrinas especulativas  
 ensinos sem base bíblica  
 fontes não confiáveis

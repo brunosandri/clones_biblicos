@@ -24,6 +24,7 @@ Depois edite `.env.local` e configure:
 ```bash
 OPENAI_API_KEY=sua_chave
 OPENAI_MODEL=gpt-4o-mini
+OPENAI_WEB_MODEL=gpt-4o-mini
 ```
 
 ## Rotas
@@ -48,8 +49,9 @@ Variáveis obrigatórias:
 ```bash
 OPENAI_API_KEY=sua_chave
 OPENAI_MODEL=gpt-4o-mini
+OPENAI_WEB_MODEL=gpt-4o-mini
 ```
 
 ## Documentos internos
 
-Os arquivos Markdown em `knowledge/` são carregados pela API e inseridos no prompt. Neste MVP todos os documentos são enviados juntos; a evolução natural é substituir isso por RAG com embeddings e PostgreSQL/pgvector.
+Os arquivos Markdown em `knowledge/` são carregados pela API e filtrados antes de entrar no prompt. Perguntas bíblicas normais usam a base interna; perguntas com termos científicos, arqueológicos ou históricos externos ativam busca web pela OpenAI e exigem fontes externas citáveis.

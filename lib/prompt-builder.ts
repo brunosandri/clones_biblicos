@@ -6,13 +6,15 @@ type BuildPromptInput = {
   character: Character;
   knowledgeDocuments: KnowledgeDocument[];
   userMessage: string;
+  sourcePolicyPrompt?: string;
 };
 
 export function buildChatPrompt({
   masterPrompt,
   character,
   knowledgeDocuments,
-  userMessage
+  userMessage,
+  sourcePolicyPrompt
 }: BuildPromptInput) {
   const orderedDocuments = orderKnowledgeDocuments(knowledgeDocuments, character.name);
   const knowledgeBlock = orderedDocuments
@@ -36,6 +38,8 @@ ${knowledgeBlock}
 
 ## Politica de uso da base
 A base enviada foi selecionada para reduzir tokens. Use apenas estes documentos, os dados do personagem ativo e referencias biblicas seguras. Se algum detalhe nao estiver na base enviada, responda com prudencia e indique que a Biblia nao revela diretamente.
+
+${sourcePolicyPrompt ?? ""}
 
 ## Regra de resposta direta
 Responda diretamente a pergunta do usuario antes de expandir o tema. Nao substitua a pergunta por uma apresentacao generica dos temas do personagem.

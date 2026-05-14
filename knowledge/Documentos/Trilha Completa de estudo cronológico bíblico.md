@@ -117,36 +117,43 @@ O que é aliança
 
 ## Módulo 4 — Patriarcas
 
-Personagens:
-
+Personagem principal:  
+  
 Abraão  
+  
+Personagens relacionados:  
+  
 Isaque  
 Jacó  
-José
-
-Livros:
-
-Gênesis 12–50
-
-Temas:
-
+José  
+  
+Livros:  
+  
+Gênesis 11–50  
+  
+Temas:  
+  
 Fé  
 Promessa  
 Aliança  
+Obediência  
+Peregrinação  
 Providência  
-Confiança
-
-Objetivos:
-
-Entender a promessa de Deus  
-Compreender a fé  
-Entender o plano de Deus
-
-Perguntas:
-
-O que é fé  
-O que é aliança  
-Como Deus guia a vida
+  
+Objetivos:  
+  
+Entender o chamado de Abraão  
+Compreender a promessa de Deus  
+Entender a aliança abraâmica  
+Perceber como a fé de Abraão aponta para a justificação pela fé  
+  
+Perguntas:  
+  
+Por que Deus chamou Abraão?  
+O que Deus prometeu a Abraão?  
+O que é fé?  
+Por que Abraão é chamado pai da fé?  
+Como Abraão aponta para Cristo?
 
 ---
 

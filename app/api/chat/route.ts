@@ -3,6 +3,7 @@ import { getCharacterById } from "@/lib/characters";
 import { loadKnowledgeDocuments, loadMasterPrompt, selectKnowledgeDocuments } from "@/lib/knowledge-loader";
 import { createOpenAIClient } from "@/lib/openai";
 import { buildChatPrompt } from "@/lib/prompt-builder";
+import { buildSourcePolicyPrompt, needsExternalSources } from "@/lib/source-policy";
 import type { ChatRequest } from "@/types";
 
 export async function POST(request: Request) {
@@ -27,6 +28,7 @@ export async function POST(request: Request) {
       loadMasterPrompt(),
       loadKnowledgeDocuments()
     ]);
+    const shouldUseExternalSources = needsExternalSources(body.message);
 
     const prompt = buildChatPrompt({
       masterPrompt,
@@ -36,10 +38,33 @@ export async function POST(request: Request) {
         characterName: character.name,
         userMessage: body.message
       }),
-      userMessage: body.message
+      userMessage: body.message,
+      sourcePolicyPrompt: buildSourcePolicyPrompt(shouldUseExternalSources)
     });
 
     const openai = createOpenAIClient();
+
+    if (shouldUseExternalSources) {
+      const response = await openai.responses.create({
+        model: process.env.OPENAI_WEB_MODEL ?? process.env.OPENAI_MODEL ?? "gpt-4o-mini",
+        tools: [
+          {
+            type: "web_search",
+            search_context_size: "low"
+          }
+        ],
+        tool_choice: "auto",
+        include: ["web_search_call.action.sources"],
+        instructions:
+          "Voce e um assistente de estudo biblico protestante. Use fontes externas somente para contexto verificavel e cite URLs. Nao substitui aconselhamento pastoral local.",
+        input: prompt
+      });
+
+      return NextResponse.json({
+        answer: response.output_text ?? "Nao foi possivel gerar uma resposta com fontes externas."
+      });
+    }
+
     const completion = await openai.chat.completions.create({
       model: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
       temperature: 0.4,

@@ -1,172 +1,135 @@
-
-Este documento descreve como os principais temas bíblicos se desenvolvem ao longo da história das Escrituras.
-
-A revelação de Deus não foi entregue de uma vez só.
-Ela foi revelada gradualmente, ao longo do tempo, até alcançar sua plenitude em Cristo.
+Este documento descreve como os principais temas bíblicos se desenvolvem ao longo da história das Escrituras. A revelação de Deus não foi entregue de uma vez só. Ela foi revelada gradualmente, ao longo do tempo, até alcançar sua plenitude em Cristo.
 
 Este mapa segue a tradição protestante histórica.
-
----
-
 # PRINCÍPIO FUNDAMENTAL
 
 Revelação progressiva significa:
 
-Deus revela sua verdade ao longo da história,
-de forma crescente,
-coerente,
-e culminando em Jesus Cristo.
-
----
-
+Deus revela sua verdade ao longo da história, de forma crescente, coerente e culminando em Jesus Cristo.
 # ESTRUTURA DO MAPA
 
 Cada tema apresenta:
-
 início da revelação  
 desenvolvimento  
 cumprimento  
 aplicação  
-
----
-
-# TEMA 1 — SACRIFÍCIO
+# TEMA — SACRIFÍCIO
 
 INÍCIO
 
-Adão
+Adão - Sacrifício implícito após a queda.
 
-Sacrifício implícito após a queda.
-
-Referência:
-
-Gênesis 3
-
----
+Referência: Gênesis 3
 
 DESENVOLVIMENTO
 
-Moisés
+Moisés - Sistema sacrificial estabelecido.
 
-Sistema sacrificial estabelecido.
-
-Referências:
-
-Levítico  
-Êxodo  
-
----
+Referências: Levítico e Êxodo  
 
 PROFETAS
 
 Sacrifícios insuficientes para remover o pecado.
 
-Referências:
-
-Isaías 1  
-Salmos 51  
-
----
+Referências: Isaías 1  e  Salmos 51  
 
 CUMPRIMENTO
 
-Jesus
+Jesus - Sacrifício perfeito e definitivo.
 
-Sacrifício perfeito e definitivo.
-
-Referências:
-
-Hebreus  
-João  
-
----
+Referências: Hebreus e João  
 
 APLICAÇÃO
 
-Paulo
+Paulo - Cristo como sacrifício final.
 
-Cristo como sacrifício final.
-
-Referências:
-
-Romanos  
-Efésios  
-
----
-
-# TEMA 2 — ALIANÇA
+Referências: Romanos e  Efésios  
+# TEMA  — ALIANÇA
 
 INÍCIO
 
-Noé
-
-Primeira aliança após o dilúvio.
-
-Referência:
-
-Gênesis 9
-
----
+Noé - Primeira aliança após o dilúvio.
+Referência: Gênesis 9
 
 DESENVOLVIMENTO
 
-Abraão
-
-Aliança baseada em promessa.
-
-Referência:
-
-Gênesis 12
-
----
+Abraão - Aliança baseada em promessa.
+Referência: Gênesis 12, Gênesis 15 e Gênesis 17
 
 EXPANSÃO
 
-Moisés
-
-Aliança baseada na lei.
-
-Referência:
-
-Êxodo
-
----
+Moisés -> Aliança baseada na lei.
+Referência: Êxodo
 
 PROFETAS
 
 Promessa de nova aliança.
+Referência: Jeremias 31
+
+CUMPRIMENTO
+
+Jesus - Nova aliança estabelecida.
+
+Referência: Lucas 22  
+
+APLICAÇÃO
+
+Paulo - Nova aliança aplicada à igreja.
+
+Referência: 2 Coríntios  
+
+# TEMA — FÉ
+
+INÍCIO
+
+Abraão
+
+A fé aparece como confiança na promessa de Deus.
 
 Referência:
 
-Jeremias 31
+Gênesis 15:6
 
----
+DESENVOLVIMENTO
+
+Israel
+
+A fé deveria produzir obediência e confiança no Senhor.
+
+Referência:
+
+Deuteronômio
+
+PROFETAS
+
+O justo viverá pela fé.
+
+Referência:
+
+Habacuque 2:4
 
 CUMPRIMENTO
 
 Jesus
 
-Nova aliança estabelecida.
+A fé se concentra na pessoa e obra de Cristo.
 
 Referência:
 
-Lucas 22  
-
----
+João 3
 
 APLICAÇÃO
 
 Paulo
 
-Nova aliança aplicada à igreja.
+A justificação é pela fé, não pelas obras da lei.
 
-Referência:
+Referências:
 
-2 Coríntios  
+Romanos 4  
+Gálatas 3
 
----
-
-# TEMA 3 — REINO
+# TEMA — REINO
 
 INÍCIO
 
@@ -178,8 +141,6 @@ Referência:
 
 Juízes  
 
----
-
 DESENVOLVIMENTO
 
 Davi
@@ -190,8 +151,6 @@ Referência:
 
 2 Samuel  
 
----
-
 PROFETAS
 
 Promessa de um rei eterno.
@@ -199,8 +158,6 @@ Promessa de um rei eterno.
 Referência:
 
 Isaías  
-
----
 
 CUMPRIMENTO
 
@@ -212,8 +169,6 @@ Referência:
 
 Mateus  
 
----
-
 APLICAÇÃO
 
 Igreja
@@ -223,10 +178,7 @@ Reino espiritual presente.
 Referência:
 
 Atos  
-
----
-
-# TEMA 4 — LEI
+# TEMA — LEI
 
 INÍCIO
 
@@ -238,8 +190,6 @@ Referência:
 
 Êxodo  
 
----
-
 DESENVOLVIMENTO
 
 Israel
@@ -250,8 +200,6 @@ Referência:
 
 Deuteronômio  
 
----
-
 PROFETAS
 
 Lei escrita no coração.
@@ -259,8 +207,6 @@ Lei escrita no coração.
 Referência:
 
 Jeremias  
-
----
 
 CUMPRIMENTO
 
@@ -272,8 +218,6 @@ Referência:
 
 Mateus  
 
----
-
 APLICAÇÃO
 
 Paulo
@@ -284,9 +228,7 @@ Referência:
 
 Romanos  
 
----
-
-# TEMA 5 — SALVAÇÃO
+# TEMA  — SALVAÇÃO
 
 INÍCIO
 
@@ -296,8 +238,6 @@ Referência:
 
 Gênesis 3  
 
----
-
 DESENVOLVIMENTO
 
 Promessa a Abraão.
@@ -306,8 +246,6 @@ Referência:
 
 Gênesis 12  
 
----
-
 PROFETAS
 
 Promessa de um salvador.
@@ -315,8 +253,6 @@ Promessa de um salvador.
 Referência:
 
 Isaías 53  
-
----
 
 CUMPRIMENTO
 
@@ -328,8 +264,6 @@ Referência:
 
 Evangelhos  
 
----
-
 APLICAÇÃO
 
 Igreja
@@ -339,10 +273,7 @@ Salvação anunciada ao mundo.
 Referência:
 
 Atos  
-
----
-
-# TEMA 6 — TEMPLO
+# TEMA — TEMPLO
 
 INÍCIO
 
@@ -352,8 +283,6 @@ Referência:
 
 Êxodo  
 
----
-
 DESENVOLVIMENTO
 
 Templo de Salomão.
@@ -361,8 +290,6 @@ Templo de Salomão.
 Referência:
 
 1 Reis  
-
----
 
 PROFETAS
 
@@ -372,8 +299,6 @@ Referência:
 
 Jeremias  
 
----
-
 CUMPRIMENTO
 
 Jesus como templo.
@@ -382,8 +307,6 @@ Referência:
 
 João  
 
----
-
 APLICAÇÃO
 
 Igreja como templo espiritual.
@@ -391,10 +314,7 @@ Igreja como templo espiritual.
 Referência:
 
 1 Coríntios  
-
----
-
-# TEMA 7 — SACERDÓCIO
+# TEMA — SACERDÓCIO
 
 INÍCIO
 
@@ -404,8 +324,6 @@ Referência:
 
 Levítico  
 
----
-
 DESENVOLVIMENTO
 
 Sistema sacerdotal.
@@ -413,8 +331,6 @@ Sistema sacerdotal.
 Referência:
 
 Números  
-
----
 
 PROFETAS
 
@@ -424,8 +340,6 @@ Referência:
 
 Malaquias  
 
----
-
 CUMPRIMENTO
 
 Jesus como sumo sacerdote.
@@ -434,8 +348,6 @@ Referência:
 
 Hebreus  
 
----
-
 APLICAÇÃO
 
 Cristãos como sacerdotes.
@@ -443,10 +355,7 @@ Cristãos como sacerdotes.
 Referência:
 
 1 Pedro  
-
----
-
-# TEMA 8 — ESPÍRITO SANTO
+# TEMA — ESPÍRITO SANTO
 
 INÍCIO
 
@@ -456,8 +365,6 @@ Referência:
 
 Juízes  
 
----
-
 DESENVOLVIMENTO
 
 Espírito atuando em profetas.
@@ -465,8 +372,6 @@ Espírito atuando em profetas.
 Referência:
 
 Samuel  
-
----
 
 PROFETAS
 
@@ -476,8 +381,6 @@ Referência:
 
 Joel  
 
----
-
 CUMPRIMENTO
 
 Pentecostes.
@@ -486,8 +389,6 @@ Referência:
 
 Atos 2  
 
----
-
 APLICAÇÃO
 
 Habitação permanente nos crentes.
@@ -495,10 +396,7 @@ Habitação permanente nos crentes.
 Referência:
 
 Romanos  
-
----
-
-# TEMA 9 — POVO DE DEUS
+# TEMA — POVO DE DEUS
 
 INÍCIO
 
@@ -508,8 +406,6 @@ Referência:
 
 Gênesis  
 
----
-
 DESENVOLVIMENTO
 
 Nação de Israel.
@@ -517,8 +413,6 @@ Nação de Israel.
 Referência:
 
 Êxodo  
-
----
 
 PROFETAS
 
@@ -528,8 +422,6 @@ Referência:
 
 Ezequiel  
 
----
-
 CUMPRIMENTO
 
 Igreja.
@@ -538,8 +430,6 @@ Referência:
 
 Atos  
 
----
-
 APLICAÇÃO
 
 Comunidade global de crentes.
@@ -547,10 +437,7 @@ Comunidade global de crentes.
 Referência:
 
 Efésios  
-
----
-
-# TEMA 10 — ESPERANÇA FUTURA
+# TEMA — ESPERANÇA FUTURA
 
 INÍCIO
 
@@ -560,8 +447,6 @@ Referência:
 
 Gênesis 3  
 
----
-
 DESENVOLVIMENTO
 
 Profecias messiânicas.
@@ -569,8 +454,6 @@ Profecias messiânicas.
 Referência:
 
 Isaías  
-
----
 
 CUMPRIMENTO
 
@@ -580,8 +463,6 @@ Referência:
 
 Evangelhos  
 
----
-
 APLICAÇÃO
 
 Nova criação.
@@ -589,8 +470,6 @@ Nova criação.
 Referência:
 
 Apocalipse  
-
----
 
 # RESUMO DO MAPA
 
@@ -614,12 +493,9 @@ Igreja
 ↓  
 Nova criação
 
----
-
 # USO NO SISTEMA
 
 Este documento serve como:
-
 controle de coerência teológica  
 base para respostas do GPT  
 mapa de ensino progressivo  
