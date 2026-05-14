@@ -1,3 +1,21 @@
+---
+doc_id: documentos-banco-de-perguntas-biblicas-niveis
+doc_type: question_bank
+scope: global
+priority: 35
+include_in_rag: true
+ai_usage: Known question patterns and expected answer framing.
+---
+
+## AI_COMPACT
+- Uso: padrões de perguntas para calibrar profundidade e formato da resposta.
+- Níveis: fundamental = respostas simples; intermediário = contexto e relações teológicas; avançado = síntese doutrinária e revelação progressiva.
+- Regra: responder primeiro a pergunta direta; depois expandir com contexto, texto bíblico, explicação, significado teológico, aplicação, conexão bíblica e fontes.
+- Quando usar: perguntas sobre como responder, FAQ, dificuldade do usuário, formato de resposta ou exemplos de perguntas bíblicas.
+- Evitar: transformar a resposta em lista genérica quando a pergunta pede uma explicação específica.
+
+## FULL_CONTENT
+
 # NÍVEL 1 — FUNDAMENTAL
 
 Estas são perguntas essenciais para novos convertidos e iniciantes.

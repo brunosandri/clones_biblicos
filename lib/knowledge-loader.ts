@@ -1,10 +1,23 @@
 import { promises as fs } from "fs";
 import path from "path";
+import type { Character } from "@/types";
+
+export type KnowledgeMetadata = {
+  doc_id?: string;
+  doc_type?: string;
+  scope?: string;
+  character_id?: string;
+  character_name?: string;
+  priority?: number;
+  include_in_rag?: boolean;
+  ai_usage?: string;
+};
 
 export type KnowledgeDocument = {
   fileName: string;
   relativePath: string;
   content: string;
+  metadata: KnowledgeMetadata;
 };
 
 const KNOWLEDGE_DIR = path.join(process.cwd(), "knowledge");
@@ -39,26 +52,33 @@ export async function loadKnowledgeDocuments(): Promise<KnowledgeDocument[]> {
     .filter((filePath) => !isMasterPrompt(filePath))
     .sort();
 
-  return Promise.all(
-    markdownFiles.map(async (filePath) => ({
-      fileName: path.basename(filePath),
-      relativePath: path.relative(KNOWLEDGE_DIR, filePath).replaceAll(path.sep, "/"),
-      content: await fs.readFile(filePath, "utf8")
-    }))
+  const documents = await Promise.all(
+    markdownFiles.map(async (filePath) => {
+      const content = await fs.readFile(filePath, "utf8");
+
+      return {
+        fileName: path.basename(filePath),
+        relativePath: path.relative(KNOWLEDGE_DIR, filePath).replaceAll(path.sep, "/"),
+        content: extractAiContent(content),
+        metadata: parseFrontmatter(content)
+      };
+    })
   );
+
+  return documents.filter((document) => document.metadata.include_in_rag !== false);
 }
 
 export function selectKnowledgeDocuments({
   documents,
-  characterName,
+  character,
   userMessage
 }: {
   documents: KnowledgeDocument[];
-  characterName: string;
+  character: Character;
   userMessage: string;
 }) {
   const selectedPaths = new Set<string>();
-  const normalizedCharacterName = normalize(characterName);
+  const normalizedCharacterName = normalize(character.name);
   const normalizedMessage = normalize(userMessage);
 
   const include = (match: (document: KnowledgeDocument, normalizedPath: string) => boolean) => {
@@ -71,25 +91,28 @@ export function selectKnowledgeDocuments({
     });
   };
 
-  // Base mínima para todas as respostas.
-  include((_, pathName) => pathName.includes("personagens/0. instrucoes gerais"));
-  include((_, pathName) => pathName.includes("personagens/00. padrao de identidade geral"));
-  include((_, pathName) => pathName.includes("sistema de perguntas e respostas padrao"));
-  include((_, pathName) => pathName.includes("regras teologicas"));
-  include((_, pathName) => pathName.includes("fontes protestantes"));
+  const includeByType = (...docTypes: string[]) => {
+    include((document) => docTypes.includes(document.metadata.doc_type ?? ""));
+  };
 
-  // Documento específico do mentor ativo.
-  include((_, pathName) => pathName.includes("personagens/") && pathName.includes(normalizedCharacterName));
+  // Base minima para todas as respostas.
+  includeByType("character_global_rules", "theology_rules", "source_policy", "progressive_revelation_rules");
 
-  // Documentos de roteamento e segurança quando a pergunta cruza períodos/personagens.
+  // Documentos especificos do mentor ativo.
+  include(
+    (document, pathName) =>
+      document.metadata.character_id === character.id ||
+      (pathName.includes("personagens/") && pathName.includes(normalizedCharacterName))
+  );
+
+  // Documentos de roteamento e seguranca quando a pergunta cruza periodos/personagens.
   if (mentionsAny(normalizedMessage, ["quem deve responder", "personagem", "mentor", "periodo", "periodo biblico"])) {
     include((_, pathName) => pathName.includes("motor de decisao do personagem"));
     include((_, pathName) => pathName.includes("classificador de perguntas"));
   }
 
   if (mentionsAny(normalizedMessage, ["cronologia", "ordem", "linha do tempo", "quando", "antes", "depois"])) {
-    include((_, pathName) => pathName.includes("cronologia biblica"));
-    include((_, pathName) => pathName.includes("trilha completa"));
+    includeByType("chronology", "study_trail");
   }
 
   if (
@@ -117,39 +140,93 @@ export function selectKnowledgeDocuments({
       "dinossauros"
     ])
   ) {
-    include((_, pathName) => pathName.includes("matriz de temas biblicos"));
+    includeByType("theme_matrix");
   }
 
   if (mentionsAny(normalizedMessage, ["revelacao", "progressiva", "cumpre", "cumprimento", "cristo", "jesus", "messias", "promessa"])) {
-    include((_, pathName) => pathName.includes("mapa de revelacao progressiva"));
+    includeByType("progressive_revelation_rules");
   }
 
   if (mentionsAny(normalizedMessage, ["pergunta", "faq", "resposta padrao", "como responder"])) {
-    include((_, pathName) => pathName.includes("banco de perguntas"));
+    includeByType("question_bank");
   }
 
   const selectedDocuments = documents.filter((document) => selectedPaths.has(document.relativePath));
-  return orderSelectedDocuments(selectedDocuments, characterName).slice(0, 9);
+  return orderSelectedDocuments(selectedDocuments, character).slice(0, 9);
 }
 
-export async function loadMasterPrompt(characterId: string) {
-  const normalizedCharacterId = normalize(characterId);
-  const masterPromptPath = (await findMarkdownFiles(KNOWLEDGE_DIR)).find((filePath) => {
-    const normalizedPath = normalize(path.relative(KNOWLEDGE_DIR, filePath).replaceAll(path.sep, "/"));
-    const normalizedFileName = normalize(path.basename(filePath));
+export async function loadMasterPrompt(character: Character) {
+  const masterPromptPath = path.join(KNOWLEDGE_DIR, ...character.masterPromptPath.split("/"));
 
-    return (
-      isMasterPrompt(filePath) &&
-      normalizedPath.includes("personagens/") &&
-      normalizedFileName.includes(normalizedCharacterId)
-    );
-  });
+  try {
+    return extractAiContent(await fs.readFile(masterPromptPath, "utf8"));
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") {
+      throw new Error(`Master Prompt nao encontrado para o personagem: ${character.id}.`);
+    }
 
-  if (!masterPromptPath) {
-    throw new Error(`Master Prompt nao encontrado para o personagem: ${characterId}.`);
+    throw error;
+  }
+}
+
+function extractAiContent(content: string) {
+  const compactMatch = content.match(/## AI_COMPACT\s+([\s\S]*?)(?=\r?\n## FULL_CONTENT|\r?\n# |$)/);
+
+  if (compactMatch?.[1]) {
+    return compactMatch[1].trim();
   }
 
-  return fs.readFile(masterPromptPath, "utf8");
+  return stripFrontmatter(content).trim();
+}
+
+function stripFrontmatter(content: string) {
+  if (!content.startsWith("---")) {
+    return content;
+  }
+
+  const endIndex = content.indexOf("\n---", 3);
+
+  if (endIndex === -1) {
+    return content;
+  }
+
+  return content.slice(endIndex + 4);
+}
+
+function parseFrontmatter(content: string): KnowledgeMetadata {
+  if (!content.startsWith("---")) {
+    return {};
+  }
+
+  const endIndex = content.indexOf("\n---", 3);
+
+  if (endIndex === -1) {
+    return {};
+  }
+
+  return content
+    .slice(3, endIndex)
+    .split(/\r?\n/)
+    .reduce<KnowledgeMetadata>((metadata, line) => {
+      const separatorIndex = line.indexOf(":");
+
+      if (separatorIndex === -1) {
+        return metadata;
+      }
+
+      const key = line.slice(0, separatorIndex).trim() as keyof KnowledgeMetadata;
+      const value = line.slice(separatorIndex + 1).trim();
+
+      if (key === "priority") {
+        metadata.priority = Number(value);
+      } else if (key === "include_in_rag") {
+        metadata.include_in_rag = value.toLowerCase() === "true";
+      } else {
+        metadata[key] = value as never;
+      }
+
+      return metadata;
+    }, {});
 }
 
 function normalize(value: string) {
@@ -163,12 +240,12 @@ function mentionsAny(value: string, keywords: string[]) {
   return keywords.some((keyword) => value.includes(normalize(keyword)));
 }
 
-function orderSelectedDocuments(documents: KnowledgeDocument[], characterName: string) {
-  const normalizedCharacterName = normalize(characterName);
+function orderSelectedDocuments(documents: KnowledgeDocument[], character: Character) {
+  const normalizedCharacterName = normalize(character.name);
 
   return [...documents].sort((first, second) => {
-    const firstScore = getPriority(first, normalizedCharacterName);
-    const secondScore = getPriority(second, normalizedCharacterName);
+    const firstScore = getPriority(first, character.id, normalizedCharacterName);
+    const secondScore = getPriority(second, character.id, normalizedCharacterName);
 
     if (firstScore !== secondScore) {
       return firstScore - secondScore;
@@ -178,28 +255,15 @@ function orderSelectedDocuments(documents: KnowledgeDocument[], characterName: s
   });
 }
 
-function getPriority(document: KnowledgeDocument, normalizedCharacterName: string) {
+function getPriority(document: KnowledgeDocument, characterId: string, normalizedCharacterName: string) {
   const normalizedPath = normalize(document.relativePath);
 
-  if (normalizedPath.includes("personagens/") && normalizedPath.includes(normalizedCharacterName)) {
+  if (
+    document.metadata.character_id === characterId ||
+    (normalizedPath.includes("personagens/") && normalizedPath.includes(normalizedCharacterName))
+  ) {
     return 0;
   }
 
-  if (normalizedPath.includes("instrucoes gerais") || normalizedPath.includes("padrao de identidade")) {
-    return 1;
-  }
-
-  if (normalizedPath.includes("sistema de perguntas e respostas padrao")) {
-    return 2;
-  }
-
-  if (normalizedPath.includes("regras teologicas") || normalizedPath.includes("fontes protestantes")) {
-    return 3;
-  }
-
-  if (normalizedPath.includes("cronologia") || normalizedPath.includes("matriz") || normalizedPath.includes("mapa")) {
-    return 4;
-  }
-
-  return 5;
+  return document.metadata.priority ?? 50;
 }

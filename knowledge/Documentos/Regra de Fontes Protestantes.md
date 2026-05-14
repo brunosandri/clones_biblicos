@@ -1,3 +1,21 @@
+---
+doc_id: documentos-regra-de-fontes-protestantes
+doc_type: source_policy
+scope: global
+priority: 15
+include_in_rag: true
+ai_usage: Rules for recommended sources and source hierarchy.
+---
+
+## AI_COMPACT
+- Uso: controlar fontes recomendadas e hierarquia de autoridade.
+- Autoridade final: Escritura. As fontes protestantes ajudam, mas não substituem o texto bíblico.
+- Fontes preferidas: comentários protestantes clássicos e acadêmicos, teologia sistemática reformada/evangélica, teologia bíblica, hermenêutica e história da igreja.
+- Regra: cite fontes como recomendação de estudo, não como prova superior à Bíblia.
+- Evitar: fontes especulativas, sensacionalistas, liberais que negam autoridade bíblica, ou afirmações externas sem qualificação.
+
+## FULL_CONTENT
+
 # FONTES PROTESTANTES RECOMENDADAS
 
 Este documento lista fontes confiáveis da tradição protestante histórica para estudo bíblico e teológico.

@@ -18,7 +18,18 @@ export function buildChatPrompt({
 }: BuildPromptInput) {
   const orderedDocuments = orderKnowledgeDocuments(knowledgeDocuments, character.name);
   const knowledgeBlock = orderedDocuments
-    .map((document) => `# Documento: ${document.relativePath}\n\n${document.content}`)
+    .map((document) => {
+      const metadataLine = [
+        document.metadata.doc_type ? `tipo=${document.metadata.doc_type}` : null,
+        document.metadata.scope ? `escopo=${document.metadata.scope}` : null,
+        document.metadata.character_id ? `personagem=${document.metadata.character_id}` : null,
+        document.metadata.ai_usage ? `uso=${document.metadata.ai_usage}` : null
+      ]
+        .filter(Boolean)
+        .join("; ");
+
+      return `# Documento: ${document.relativePath}\n${metadataLine ? `Metadados: ${metadataLine}\n` : ""}\n${document.content}`;
+    })
     .join("\n\n---\n\n");
 
   return `
@@ -32,6 +43,9 @@ ${masterPrompt}
 - Temas principais: ${character.themes.join(", ")}
 - Tom: ${character.tone}
 - Enquadramento do mentor: ${character.mentorFrame}
+
+## Regra de identidade ativa
+Voce deve responder exclusivamente como ${character.name}. Nunca se identifique como outro personagem biblico. Se algum documento interno mencionar outro personagem, trate-o apenas como contexto secundario e preserve a identidade ativa de ${character.name}.
 
 ## Base interna de conhecimento
 ${knowledgeBlock}
@@ -95,7 +109,11 @@ function getDocumentPriority(document: KnowledgeDocument, normalizedCharacterNam
     return 0;
   }
 
-  if (normalizedPath.includes("padrao de identidade") || normalizedPath.includes("instrucoes gerais")) {
+  if (typeof document.metadata.priority === "number") {
+    return document.metadata.priority;
+  }
+
+  if (normalizedPath.includes("instrucoes gerais")) {
     return 1;
   }
 

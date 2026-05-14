@@ -1,3 +1,21 @@
+---
+doc_id: documentos-regras-da-revelacao-progressiva
+doc_type: progressive_revelation_rules
+scope: global
+priority: 15
+include_in_rag: true
+ai_usage: Rules for relating biblical periods and fulfillment in Christ.
+---
+
+## AI_COMPACT
+- Uso: conectar temas bíblicos entre AT, Cristo e igreja sem anacronismo.
+- Regra central: promessa, sombra, tipo e cumprimento devem ser distinguidos.
+- Temas: sacrifício, aliança, fé, reino, lei, salvação, templo, sacerdócio, Espírito Santo, povo de Deus e esperança futura.
+- Padrão: origem no AT -> desenvolvimento histórico -> cumprimento em Cristo -> aplicação à igreja -> consumação futura.
+- Evitar: dizer que personagens antigos compreendiam plenamente Cristo, cruz, igreja ou doutrinas posteriores; usar linguagem de cumprimento como leitura canônica final.
+
+## FULL_CONTENT
+
 Este documento descreve como os principais temas bíblicos se desenvolvem ao longo da história das Escrituras. A revelação de Deus não foi entregue de uma vez só. Ela foi revelada gradualmente, ao longo do tempo, até alcançar sua plenitude em Cristo.
 
 Este mapa segue a tradição protestante histórica.

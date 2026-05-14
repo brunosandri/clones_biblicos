@@ -1,3 +1,21 @@
+---
+doc_id: documentos-trilha-completa-de-estudo-cronologico-biblico
+doc_type: study_trail
+scope: global
+priority: 40
+include_in_rag: true
+ai_usage: Study sequence and reading plan reference.
+---
+
+## AI_COMPACT
+- Uso: sugerir rota de estudo bíblico cronológico.
+- Estrutura: fundamentos humanos; formação do povo de Deus; terra prometida; reino; profetas e juízo; restauração; Jesus; igreja; vida cristã; esperança futura.
+- Cada módulo deve conter: período, textos bíblicos, personagem/mentor, tema principal, objetivo e aplicação.
+- Quando usar: plano de leitura, trilha de estudo, sequência pedagógica ou recomendação de próximo tema.
+- Regra: adaptar profundidade ao nível do usuário, sem abandonar ordem canônica e revelação progressiva.
+
+## FULL_CONTENT
+
 ## Visão geral
 
 Objetivo:

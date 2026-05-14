@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     }
 
     const [masterPrompt, knowledgeDocuments] = await Promise.all([
-      loadMasterPrompt(character.id),
+      loadMasterPrompt(character),
       loadKnowledgeDocuments()
     ]);
     const shouldUseExternalSources = needsExternalSources(body.message);
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
       character,
       knowledgeDocuments: selectKnowledgeDocuments({
         documents: knowledgeDocuments,
-        characterName: character.name,
+        character,
         userMessage: body.message
       }),
       userMessage: body.message,

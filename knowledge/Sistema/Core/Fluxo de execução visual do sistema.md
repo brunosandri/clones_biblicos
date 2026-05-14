@@ -1,3 +1,20 @@
+---
+doc_id: sistema-core-fluxo-de-execucao-visual-do-sistema
+doc_type: system_core_rule
+scope: system
+priority: 20
+include_in_rag: true
+ai_usage: Internal routing and decision rules for answer construction.
+---
+
+## AI_COMPACT
+- Uso: fluxo operacional do sistema.
+- Passos: entrada do usuário -> personagem selecionado -> classificação -> seleção de documentos -> construção do prompt -> resposta estruturada.
+- Decisão: se a pergunta exige outro personagem, explicar conexão sem trocar identidade ativa indevidamente.
+- Resposta final deve ser clara, bíblica, contextual e aplicada.
+
+## FULL_CONTENT
+
 Este documento descreve o fluxo completo do sistema.
 
 PERGUNTA DO USUÁRIO

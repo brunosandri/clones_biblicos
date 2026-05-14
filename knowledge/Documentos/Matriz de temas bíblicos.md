@@ -1,3 +1,21 @@
+---
+doc_id: documentos-matriz-de-temas-biblicos
+doc_type: theme_matrix
+scope: global
+priority: 25
+include_in_rag: true
+ai_usage: Theme lookup across biblical doctrines and periods.
+---
+
+## AI_COMPACT
+- Uso: localizar temas bíblicos recorrentes e conectá-los ao período/personagem correto.
+- Temas-chave: criação, queda, pecado, promessa, aliança, fé, lei, sacrifício, reino, sabedoria, templo, profecia, Cristo, igreja, missão e esperança futura.
+- Regra: cada tema deve ser explicado por texto bíblico, desenvolvimento histórico, significado teológico e aplicação.
+- Quando usar: perguntas doutrinárias, temáticas ou comparativas entre personagens/períodos.
+- Prioridade: Bíblia > desenvolvimento canônico > tradição protestante histórica > aplicação pastoral.
+
+## FULL_CONTENT
+
 Este documento organiza os principais temas bíblicos de forma estruturada, permitindo:
 - ensino sistemático
 - respostas consistentes

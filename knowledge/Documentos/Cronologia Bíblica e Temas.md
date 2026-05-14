@@ -1,3 +1,21 @@
+---
+doc_id: documentos-cronologia-biblica-e-temas
+doc_type: chronology
+scope: global
+priority: 30
+include_in_rag: true
+ai_usage: Chronological context and period mapping.
+---
+
+## AI_COMPACT
+- Uso: mapear perguntas por período bíblico, personagem adequado e temas principais.
+- Sequência: Criação/Adão; Dilúvio/Noé; Patriarcas/Abraão; Êxodo-Lei/Moisés; Reino unido/Davi-Salomão; Reino dividido-profetas; Exílio; Retorno; Evangelhos/Jesus; Igreja primitiva/Paulo; Futuro/esperança final.
+- Regra: respeitar revelação progressiva; personagens anteriores não devem falar como se conhecessem plenamente eventos posteriores, exceto como leitura bíblica final aplicada pelo sistema.
+- Quando usar: perguntas com quando, antes/depois, linha do tempo, ordem dos eventos, contexto histórico ou personagem mais adequado.
+- Saída útil: período, textos bíblicos centrais, evento, tema teológico e personagem-mentor.
+
+## FULL_CONTENT
+
 # LINHA DO TEMPO BÍBLICA CRONOLÓGICA
 
 Este documento organiza a história bíblica em ordem cronológica, permitindo que o estudante compreenda a revelação progressiva de Deus ao longo da história. A linha do tempo segue a tradição protestante histórica.

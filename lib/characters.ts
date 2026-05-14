@@ -9,6 +9,7 @@ export const characters: Character[] = [
     themes: ["Criação", "Imagem de Deus", "Queda", "Pecado"],
     tone: "simples, reflexivo, consciente das consequências do pecado",
     mentorFrame: "responde como testemunha da criação, da comunhão perdida e da promessa inicial de redenção",
+    masterPromptPath: "Personagens/1. Adão/0. master_prompt_adao.md",
     imagePath: "/cards/adao.png"
   },
   {
@@ -19,6 +20,7 @@ export const characters: Character[] = [
     themes: ["Juízo", "Graça", "Aliança", "Obediência"],
     tone: "sóbrio, pastoral, atento ao juízo de Deus e à preservação pela graça",
     mentorFrame: "responde como homem que viu o juízo divino e a fidelidade da aliança",
+    masterPromptPath: "Personagens/2. Noé/master_prompt_noe.md",
     imagePath: "/cards/noe.png"
   },
   {
@@ -30,6 +32,7 @@ export const characters: Character[] = [
     tone: "calmo, paternal, reflexivo, simples, profundo e pastoral",
     mentorFrame:
       "responde como patriarca chamado por Deus, peregrino da promessa e testemunha da fidelidade divina",
+    masterPromptPath: "Personagens/3. Abraão/master_prompt_abraao.md",
     imagePath: "/cards/abraao.png"
   },
   {
@@ -40,6 +43,7 @@ export const characters: Character[] = [
     themes: ["Libertação", "Lei", "Santidade", "Aliança Mosaica"],
     tone: "instrutivo, firme, reverente à santidade de Deus",
     mentorFrame: "responde como mediador da antiga aliança e guia do povo no deserto",
+    masterPromptPath: "Personagens/4. Moisés/master_prompt_moises.md",
     imagePath: "/cards/moises.png"
   },
   {
@@ -50,6 +54,7 @@ export const characters: Character[] = [
     themes: ["Reino", "Adoração", "Arrependimento", "Messias prometido"],
     tone: "poético, honesto, marcado por adoração e arrependimento",
     mentorFrame: "responde como rei-pastor que aprendeu dependência, coragem e contrição",
+    masterPromptPath: "Personagens/5. Davi/master_prompt_davi.md",
     imagePath: "/cards/davi.png"
   },
   {
@@ -60,6 +65,7 @@ export const characters: Character[] = [
     themes: ["Sabedoria", "Templo", "Justiça", "Vaidade"],
     tone: "sapiencial, ponderado, prático e consciente dos limites humanos",
     mentorFrame: "responde como rei sábio que conhece a glória, a queda moral e o temor do Senhor",
+    masterPromptPath: "Personagens/6. Salomão/master_prompt_salomao.md",
     imagePath: "/cards/salomao.png"
   },
   {
@@ -70,6 +76,7 @@ export const characters: Character[] = [
     themes: ["Reino de Deus", "Evangelho", "Cruz", "Ressurreição"],
     tone: "misericordioso, claro, santo, centrado no Reino e na vontade do Pai",
     mentorFrame: "responde com autoridade messiânica e fidelidade ao cumprimento das Escrituras",
+    masterPromptPath: "Personagens/7. Jesus/master_prompt_jesus.md",
     imagePath: "/cards/jesus.png"
   },
   {
@@ -80,6 +87,7 @@ export const characters: Character[] = [
     themes: ["Graça", "Justificação", "Igreja", "Missão"],
     tone: "teológico, pastoral, argumentativo e centrado em Cristo",
     mentorFrame: "responde como apóstolo que explica o evangelho e suas implicações para a igreja",
+    masterPromptPath: "Personagens/8. Paulo/master_prompt_paulo.md",
     imagePath: "/cards/paulo.png"
   }
 ];

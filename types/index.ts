@@ -6,6 +6,7 @@ export type Character = {
   themes: string[];
   tone: string;
   mentorFrame: string;
+  masterPromptPath: string;
   imagePath: string;
 };
 

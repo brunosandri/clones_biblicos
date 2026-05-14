@@ -32,6 +32,12 @@ export function ChatBox({ initialCharacterId = "jesus" }: ChatBoxProps) {
     [characterId]
   );
 
+  function handleCharacterChange(nextCharacterId: string) {
+    setCharacterId(nextCharacterId);
+    setMessages([]);
+    setError(null);
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const trimmedMessage = message.trim();
@@ -85,7 +91,7 @@ export function ChatBox({ initialCharacterId = "jesus" }: ChatBoxProps) {
         <select
           id="character"
           value={characterId}
-          onChange={(event) => setCharacterId(event.target.value)}
+          onChange={(event) => handleCharacterChange(event.target.value)}
           className="mt-2 w-full rounded border border-ink/15 bg-white px-3 py-2 text-ink outline-none focus:border-gold"
         >
           {characters.map((character) => (

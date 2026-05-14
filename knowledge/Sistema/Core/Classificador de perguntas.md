@@ -1,3 +1,21 @@
+---
+doc_id: sistema-core-classificador-de-perguntas
+doc_type: system_core_rule
+scope: system
+priority: 20
+include_in_rag: true
+ai_usage: Internal routing and decision rules for answer construction.
+---
+
+## AI_COMPACT
+- Uso: classificar pergunta antes de selecionar documentos.
+- Etapas: tema principal -> subtópico -> nível do usuário -> intenção -> personagem mais adequado.
+- Intenções: explicação, aplicação, comparação, cronologia, doutrina, fonte, aconselhamento bíblico ou fora de escopo.
+- Saída esperada: categoria, documentos úteis, personagem ativo e profundidade de resposta.
+- Regra: classificação serve à resposta; não aparecer como burocracia para o usuário.
+
+## FULL_CONTENT
+
 Este módulo identifica:
 1. tema  
 2. subtema  
