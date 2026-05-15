@@ -38,17 +38,26 @@ export type ParsedKiwifyWebhook = {
 
 export function parseKiwifyWebhook(payload: unknown): ParsedKiwifyWebhook {
   const record = toRecord(payload) ?? {};
-  const eventType = firstString(record, ["event", "event_type", "webhook_event_type", "type", "status", "order_status"]) ?? "";
+  const data = toRecord(record.data) ?? toRecord(record.Data);
+  const source = data ?? record;
+  const eventType =
+    firstString(record, ["event", "event_type", "webhook_event_type", "type"]) ??
+    firstString(source, ["event", "event_type", "webhook_event_type", "type", "status", "order_status"]) ??
+    "";
   const customer = toRecord(record.customer) ?? toRecord(record.Customer) ?? toRecord(record.buyer) ?? toRecord(record.client);
-  const product = toRecord(record.product) ?? toRecord(record.Product);
-  const subscription = toRecord(record.subscription) ?? toRecord(record.Subscription);
-  const order = toRecord(record.order) ?? toRecord(record.Order) ?? record;
+  const dataCustomer = toRecord(source.customer) ?? toRecord(source.Customer) ?? toRecord(source.buyer) ?? toRecord(source.client);
+  const product = toRecord(source.product) ?? toRecord(source.Product);
+  const subscription = toRecord(source.subscription) ?? toRecord(source.Subscription);
+  const order = toRecord(source.order) ?? toRecord(source.Order) ?? source;
   const email =
-    firstString(record, ["email", "customer_email", "buyer_email"]) ??
+    firstString(source, ["email", "customer_email", "buyer_email", "client_email"]) ??
+    firstString(dataCustomer, ["email"]) ??
     firstString(customer, ["email"]) ??
+    findDeepString(source, ["email"]) ??
     null;
   const name =
-    firstString(record, ["name", "customer_name", "buyer_name"]) ??
+    firstString(source, ["name", "customer_name", "buyer_name", "client_name"]) ??
+    firstString(dataCustomer, ["name", "full_name"]) ??
     firstString(customer, ["name", "full_name"]) ??
     email;
   const orderId = firstString(order, ["id", "order_id", "order_ref", "code", "reference"]) ?? null;
@@ -56,8 +65,8 @@ export function parseKiwifyWebhook(payload: unknown): ParsedKiwifyWebhook {
     firstString(subscription, ["id", "subscription_id", "code"]) ??
     firstString(record, ["subscription_id"]) ??
     null;
-  const plan = inferPlan(record, product);
-  const status = inferStatus(eventType || JSON.stringify(record));
+  const plan = inferPlan(source, product);
+  const status = inferStatus(eventType || JSON.stringify(source));
 
   return {
     eventType: eventType || "unknown",
@@ -126,6 +135,41 @@ function firstString(record: Record<string, unknown> | undefined, keys: string[]
 
     if (typeof value === "number") {
       return String(value);
+    }
+  }
+
+  return null;
+}
+
+function findDeepString(value: unknown, keys: string[]): string | null {
+  if (!value || typeof value !== "object") {
+    return null;
+  }
+
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      const found = findDeepString(item, keys);
+
+      if (found) {
+        return found;
+      }
+    }
+
+    return null;
+  }
+
+  const record = value as Record<string, unknown>;
+  const directValue = firstString(record, keys);
+
+  if (directValue) {
+    return directValue;
+  }
+
+  for (const nestedValue of Object.values(record)) {
+    const found = findDeepString(nestedValue, keys);
+
+    if (found) {
+      return found;
     }
   }
 
