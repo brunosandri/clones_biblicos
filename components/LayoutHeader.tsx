@@ -38,9 +38,14 @@ export async function LayoutHeader() {
               </button>
             </form>
           ) : (
-            <Link className="rounded px-3 py-2 transition hover:bg-white/10 hover:text-parchment" href="/login">
-              Entrar
-            </Link>
+            <>
+              <Link className="rounded px-3 py-2 transition hover:bg-white/10 hover:text-parchment" href="/login">
+                Entrar
+              </Link>
+              <Link className="rounded bg-gold px-3 py-2 text-ink transition hover:bg-parchment" href="/#planos">
+                Assinar
+              </Link>
+            </>
           )}
         </nav>
       </div>

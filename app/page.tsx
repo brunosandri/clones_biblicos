@@ -130,10 +130,10 @@ export default function HomePage() {
                 <ArrowRight size={18} aria-hidden="true" />
               </Link>
               <Link
-                href="/personagens"
+                href="/login"
                 className="inline-flex items-center justify-center rounded border border-parchment/20 px-6 py-3 text-sm font-semibold text-parchment transition hover:border-gold hover:text-gold"
               >
-                Conhecer os clones
+                Já sou assinante
               </Link>
             </div>
             <div className="mt-8 grid max-w-2xl gap-3 text-sm text-parchment/70 sm:grid-cols-3">
@@ -203,19 +203,14 @@ export default function HomePage() {
                 Oito vozes para acompanhar a história da redenção.
               </h2>
             </div>
-            <Link
-              href="/personagens"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-gold transition hover:text-parchment"
-            >
-              Ver todos
-              <ArrowRight size={17} aria-hidden="true" />
-            </Link>
+            <p className="text-sm leading-6 text-parchment/65 md:max-w-xs">
+              Assine para conversar com cada mentor no chat exclusivo para membros.
+            </p>
           </div>
           <div className="mt-9 grid grid-cols-2 gap-3 md:grid-cols-4">
             {characters.map((character) => (
-              <Link
+              <div
                 key={character.id}
-                href={`/chat?character=${character.id}`}
                 className="group relative aspect-[4/5] overflow-hidden rounded-lg border border-parchment/10 bg-white/5"
               >
                 <Image src={character.imagePath} alt="" fill sizes="25vw" className="object-cover transition duration-300 group-hover:scale-105" />
@@ -224,7 +219,7 @@ export default function HomePage() {
                   <h3 className="font-serif text-2xl font-semibold">{character.name}</h3>
                   <p className="mt-1 text-xs text-parchment/70">{character.period}</p>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
@@ -329,10 +324,10 @@ export default function HomePage() {
               </p>
             </div>
             <Link
-              href="#planos"
+              href={monthlyCheckoutUrl}
               className="mt-5 inline-flex items-center justify-center gap-2 rounded bg-gold px-5 py-3 text-sm font-semibold text-ink transition hover:bg-parchment md:mt-0"
             >
-              Escolher plano
+              Começar agora
               <ArrowRight size={17} aria-hidden="true" />
             </Link>
           </div>
