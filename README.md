@@ -27,15 +27,44 @@ OPENAI_MODEL=gpt-4o-mini
 OPENAI_WEB_MODEL=gpt-4o-mini
 AUTH_SECRET=um_segredo_longo_para_assinar_sessoes
 AUTH_EMAIL=cliente@exemplo.com
-AUTH_PASSWORD=senha_do_cliente
 AUTH_NAME=Cliente
+RESEND_API_KEY=sua_chave_resend
+MAGIC_LINK_FROM="Clones da Bíblia <acesso@seudominio.com>"
+DATABASE_URL=postgresql://usuario:senha@host:5432/banco
+KIWIFY_WEBHOOK_SECRET=um_segredo_para_validar_webhook
+NEXT_PUBLIC_MONTHLY_CHECKOUT_URL=https://pay.kiwify.com.br/HjxToAF
+NEXT_PUBLIC_ANNUAL_CHECKOUT_URL=https://pay.kiwify.com.br/zimm1D9
 ```
 
 Para múltiplos usuários, use `AUTH_USERS` como JSON:
 
 ```bash
-AUTH_USERS=[{"email":"cliente1@exemplo.com","password":"senha1","name":"Cliente 1"},{"email":"cliente2@exemplo.com","password":"senha2","name":"Cliente 2"}]
+AUTH_USERS=[{"email":"cliente1@exemplo.com","name":"Cliente 1"},{"email":"cliente2@exemplo.com","name":"Cliente 2"}]
 ```
+
+O login usa link mágico por e-mail. Em produção, configure `RESEND_API_KEY` e `MAGIC_LINK_FROM`.
+Sem essas variáveis, o link será exibido no log do servidor para desenvolvimento local.
+
+## Integração Kiwify
+
+Configure um PostgreSQL no Railway e defina `DATABASE_URL`. Depois, na Kiwify, cadastre o webhook:
+
+```bash
+URL: https://seu-dominio.com/api/kiwify/webhook
+Token: mesmo valor de KIWIFY_WEBHOOK_SECRET
+```
+
+Eventos recomendados:
+
+- Compra aprovada
+- Assinatura renovada
+- Reembolso
+- Chargeback
+- Compra recusada
+- Assinatura cancelada
+- Assinatura atrasada
+
+Compras e renovações ativam o e-mail do comprador. Reembolso, chargeback, recusa, cancelamento ou atraso desativam o acesso.
 
 ## Rotas
 
@@ -62,8 +91,13 @@ OPENAI_MODEL=gpt-4o-mini
 OPENAI_WEB_MODEL=gpt-4o-mini
 AUTH_SECRET=um_segredo_longo_para_assinar_sessoes
 AUTH_EMAIL=cliente@exemplo.com
-AUTH_PASSWORD=senha_do_cliente
 AUTH_NAME=Cliente
+RESEND_API_KEY=sua_chave_resend
+MAGIC_LINK_FROM="Clones da Bíblia <acesso@seudominio.com>"
+DATABASE_URL=postgresql://usuario:senha@host:5432/banco
+KIWIFY_WEBHOOK_SECRET=um_segredo_para_validar_webhook
+NEXT_PUBLIC_MONTHLY_CHECKOUT_URL=https://pay.kiwify.com.br/HjxToAF
+NEXT_PUBLIC_ANNUAL_CHECKOUT_URL=https://pay.kiwify.com.br/zimm1D9
 ```
 
 ## Documentos internos

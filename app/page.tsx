@@ -68,6 +68,9 @@ const faq = [
   }
 ];
 
+const monthlyCheckoutUrl = process.env.NEXT_PUBLIC_MONTHLY_CHECKOUT_URL ?? "https://pay.kiwify.com.br/HjxToAF";
+const annualCheckoutUrl = process.env.NEXT_PUBLIC_ANNUAL_CHECKOUT_URL ?? "https://pay.kiwify.com.br/zimm1D9";
+
 export default function HomePage() {
   return (
     <main className="bg-parchment text-ink">
@@ -258,7 +261,7 @@ export default function HomePage() {
                 <li className="flex gap-2"><Check size={17} className="mt-0.5 text-olive" /> Trilha cronológica de estudo</li>
               </ul>
               <Link
-                href="/chat"
+                href={monthlyCheckoutUrl}
                 className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded bg-ink px-5 py-3 text-sm font-semibold text-parchment transition hover:bg-cedar"
               >
                 Começar mensal
@@ -285,7 +288,7 @@ export default function HomePage() {
                 <li className="flex gap-2"><Check size={17} className="mt-0.5 text-gold" /> Ideal para devocional, discipulado e escola bíblica</li>
               </ul>
               <Link
-                href="/chat"
+                href={annualCheckoutUrl}
                 className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded bg-gold px-5 py-3 text-sm font-semibold text-ink transition hover:bg-parchment"
               >
                 Assinar anual

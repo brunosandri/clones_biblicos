@@ -2,7 +2,6 @@ export const SESSION_COOKIE_NAME = "clones_session";
 
 export type AuthUser = {
   email: string;
-  password: string;
   name: string;
 };
 
@@ -13,6 +12,7 @@ export type SessionPayload = {
 };
 
 const SESSION_DURATION_SECONDS = 60 * 60 * 24 * 30;
+const MAGIC_LINK_DURATION_SECONDS = 60 * 15;
 
 export function getAuthUsers(): AuthUser[] {
   const usersJson = process.env.AUTH_USERS;
@@ -21,10 +21,9 @@ export function getAuthUsers(): AuthUser[] {
     try {
       const parsedUsers = JSON.parse(usersJson) as Partial<AuthUser>[];
       return parsedUsers
-        .filter((user): user is AuthUser => Boolean(user.email && user.password))
+        .filter((user): user is AuthUser => Boolean(user.email))
         .map((user) => ({
           email: user.email.trim().toLowerCase(),
-          password: user.password,
           name: user.name?.trim() || user.email.trim()
         }));
     } catch {
@@ -32,22 +31,21 @@ export function getAuthUsers(): AuthUser[] {
     }
   }
 
-  if (!process.env.AUTH_EMAIL || !process.env.AUTH_PASSWORD) {
+  if (!process.env.AUTH_EMAIL) {
     return [];
   }
 
   return [
     {
       email: process.env.AUTH_EMAIL.trim().toLowerCase(),
-      password: process.env.AUTH_PASSWORD,
       name: process.env.AUTH_NAME?.trim() || process.env.AUTH_EMAIL.trim()
     }
   ];
 }
 
-export function validateCredentials(email: string, password: string) {
+export function findAuthUserByEmail(email: string) {
   const normalizedEmail = email.trim().toLowerCase();
-  return getAuthUsers().find((user) => user.email === normalizedEmail && user.password === password);
+  return getAuthUsers().find((user) => user.email === normalizedEmail);
 }
 
 export async function createSessionToken(user: Pick<AuthUser, "email" | "name">) {
@@ -62,7 +60,47 @@ export async function createSessionToken(user: Pick<AuthUser, "email" | "name">)
   return `${encodedPayload}.${signature}`;
 }
 
+export async function createMagicLinkToken(user: Pick<AuthUser, "email" | "name">, nextPath: string) {
+  const payload = {
+    email: user.email,
+    name: user.name,
+    next: nextPath,
+    purpose: "magic-link",
+    exp: Math.floor(Date.now() / 1000) + MAGIC_LINK_DURATION_SECONDS
+  };
+  const encodedPayload = base64UrlEncode(JSON.stringify(payload));
+  const signature = await sign(encodedPayload);
+
+  return `${encodedPayload}.${signature}`;
+}
+
+export async function verifyMagicLinkToken(token?: string | null) {
+  const payload = await verifySignedPayload<{
+    email: string;
+    name: string;
+    next: string;
+    purpose: string;
+    exp: number;
+  }>(token);
+
+  if (!payload || payload.purpose !== "magic-link") {
+    return null;
+  }
+
+  return payload;
+}
+
 export async function verifySessionToken(token?: string | null): Promise<SessionPayload | null> {
+  const payload = await verifySignedPayload<SessionPayload>(token);
+
+  if (!payload || !payload.email || !payload.name) {
+    return null;
+  }
+
+  return payload;
+}
+
+async function verifySignedPayload<T extends { exp: number }>(token?: string | null): Promise<T | null> {
   if (!token) {
     return null;
   }
@@ -80,9 +118,9 @@ export async function verifySessionToken(token?: string | null): Promise<Session
   }
 
   try {
-    const payload = JSON.parse(base64UrlDecode(encodedPayload)) as SessionPayload;
+    const payload = JSON.parse(base64UrlDecode(encodedPayload)) as T;
 
-    if (!payload.email || !payload.name || payload.exp < Math.floor(Date.now() / 1000)) {
+    if (payload.exp < Math.floor(Date.now() / 1000)) {
       return null;
     }
 
@@ -94,6 +132,10 @@ export async function verifySessionToken(token?: string | null): Promise<Session
 
 export function getSessionMaxAge() {
   return SESSION_DURATION_SECONDS;
+}
+
+export function getMagicLinkMaxAge() {
+  return MAGIC_LINK_DURATION_SECONDS;
 }
 
 function getAuthSecret() {
