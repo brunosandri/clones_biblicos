@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { upsertKiwifyAccess } from "@/lib/access-store";
+import { createMagicLinkToken } from "@/lib/auth";
+import { sendMagicLinkEmail } from "@/lib/email";
 import { parseKiwifyWebhook } from "@/lib/kiwify";
+import { getPublicUrl } from "@/lib/public-url";
 
 export function GET() {
   return NextResponse.json({
@@ -43,6 +46,22 @@ export async function POST(request: Request) {
       payload,
       accessExpiresAt: parsed.accessExpiresAt
     });
+
+    if (parsed.status === "active") {
+      const user = {
+        email: parsed.email,
+        name: parsed.name ?? parsed.email
+      };
+      const token = await createMagicLinkToken(user, "/chat");
+      const magicLink = getPublicUrl("/api/auth/magic-link/verify", request);
+      magicLink.searchParams.set("token", token);
+
+      await sendMagicLinkEmail({
+        to: user.email,
+        name: user.name,
+        magicLink: magicLink.toString()
+      });
+    }
 
     return NextResponse.json({
       ok: true,
