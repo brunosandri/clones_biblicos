@@ -3,6 +3,7 @@ import { getCharacterById } from "@/lib/characters";
 import { loadKnowledgeDocuments, loadMasterPrompt, selectKnowledgeDocuments } from "@/lib/knowledge-loader";
 import { createOpenAIClient } from "@/lib/openai";
 import { buildChatPrompt } from "@/lib/prompt-builder";
+import { CHAT_SECURITY_INSTRUCTIONS, validateUserMessage } from "@/lib/prompt-security";
 import { buildSourcePolicyPrompt, needsExternalSources } from "@/lib/source-policy";
 import type { ChatRequest } from "@/types";
 
@@ -10,8 +11,13 @@ export async function POST(request: Request) {
   try {
     const body = (await request.json()) as Partial<ChatRequest>;
 
-    if (!body.characterId || !body.message) {
-      return NextResponse.json({ error: "characterId e message sao obrigatorios." }, { status: 400 });
+    const userMessage = validateUserMessage(body.message);
+
+    if (!body.characterId || !userMessage.ok) {
+      return NextResponse.json(
+        { error: !body.characterId ? "characterId e obrigatorio." : userMessage.error },
+        { status: 400 }
+      );
     }
 
     if (!process.env.OPENAI_API_KEY) {
@@ -28,7 +34,7 @@ export async function POST(request: Request) {
       loadMasterPrompt(character),
       loadKnowledgeDocuments()
     ]);
-    const shouldUseExternalSources = needsExternalSources(body.message);
+    const shouldUseExternalSources = needsExternalSources(userMessage.message);
 
     const prompt = buildChatPrompt({
       masterPrompt,
@@ -36,10 +42,11 @@ export async function POST(request: Request) {
       knowledgeDocuments: selectKnowledgeDocuments({
         documents: knowledgeDocuments,
         character,
-        userMessage: body.message
+        userMessage: userMessage.message
       }),
-      userMessage: body.message,
-      sourcePolicyPrompt: buildSourcePolicyPrompt(shouldUseExternalSources)
+      userMessage: userMessage.message,
+      sourcePolicyPrompt: buildSourcePolicyPrompt(shouldUseExternalSources),
+      hasPromptInjectionPattern: userMessage.hasPromptInjectionPattern
     });
 
     const openai = createOpenAIClient();
@@ -55,8 +62,10 @@ export async function POST(request: Request) {
         ],
         tool_choice: "auto",
         include: ["web_search_call.action.sources"],
-        instructions:
+        instructions: [
           "Voce e um assistente de estudo biblico protestante. Use fontes externas somente para contexto verificavel e cite URLs. Nao substitui aconselhamento pastoral local.",
+          CHAT_SECURITY_INSTRUCTIONS
+        ].join("\n\n"),
         input: prompt
       });
 
@@ -71,8 +80,10 @@ export async function POST(request: Request) {
       messages: [
         {
           role: "system",
-          content:
-            "Voce e um assistente de estudo biblico protestante. Nao substitui aconselhamento pastoral local."
+          content: [
+            "Voce e um assistente de estudo biblico protestante. Nao substitui aconselhamento pastoral local.",
+            CHAT_SECURITY_INSTRUCTIONS
+          ].join("\n\n")
         },
         {
           role: "user",
