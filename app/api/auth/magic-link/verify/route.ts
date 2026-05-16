@@ -6,6 +6,7 @@ import {
   SESSION_COOKIE_NAME,
   verifyMagicLinkToken
 } from "@/lib/auth";
+import { getPublicUrl } from "@/lib/public-url";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -13,12 +14,12 @@ export async function GET(request: Request) {
   const user = payload ? await findActiveAccessUserByEmail(payload.email) : null;
 
   if (!payload || !user) {
-    const loginUrl = new URL("/login", request.url);
+    const loginUrl = getPublicUrl("/login", request);
     loginUrl.searchParams.set("error", "link");
     return NextResponse.redirect(loginUrl, { status: 303 });
   }
 
-  const response = NextResponse.redirect(new URL(sanitizeNextPath(payload.next), request.url), { status: 303 });
+  const response = NextResponse.redirect(getPublicUrl(sanitizeNextPath(payload.next), request), { status: 303 });
   response.cookies.set({
     name: SESSION_COOKIE_NAME,
     value: await createSessionToken(user),

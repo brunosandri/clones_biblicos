@@ -2,19 +2,20 @@ import { NextResponse } from "next/server";
 import { findActiveAccessUserByEmail } from "@/lib/access-store";
 import { createMagicLinkToken } from "@/lib/auth";
 import { sendMagicLinkEmail } from "@/lib/email";
+import { getPublicUrl } from "@/lib/public-url";
 
 export async function POST(request: Request) {
   const formData = await request.formData();
   const email = String(formData.get("email") ?? "");
   const nextPath = sanitizeNextPath(String(formData.get("next") ?? "/chat"));
   const user = await findActiveAccessUserByEmail(email);
-  const loginUrl = new URL("/login", request.url);
+  const loginUrl = getPublicUrl("/login", request);
   loginUrl.searchParams.set("sent", "1");
   loginUrl.searchParams.set("next", nextPath);
 
   if (user) {
     const token = await createMagicLinkToken(user, nextPath);
-    const magicLink = new URL("/api/auth/magic-link/verify", request.url);
+    const magicLink = getPublicUrl("/api/auth/magic-link/verify", request);
     magicLink.searchParams.set("token", token);
     await sendMagicLinkEmail({
       to: user.email,

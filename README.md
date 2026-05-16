@@ -25,6 +25,7 @@ Depois edite `.env.local` e configure:
 OPENAI_API_KEY=sua_chave
 OPENAI_MODEL=gpt-4o-mini
 OPENAI_WEB_MODEL=gpt-4o-mini
+APP_URL=https://seu-dominio.com
 AUTH_SECRET=um_segredo_longo_para_assinar_sessoes
 AUTH_EMAIL=cliente@exemplo.com
 AUTH_NAME=Cliente
@@ -44,6 +45,7 @@ AUTH_USERS=[{"email":"cliente1@exemplo.com","name":"Cliente 1"},{"email":"client
 
 O login usa link mágico por e-mail. Em produção, configure `RESEND_API_KEY` e `MAGIC_LINK_FROM`.
 Sem essas variáveis, o link será exibido no log do servidor para desenvolvimento local.
+Configure `APP_URL` com o domínio público da aplicação, sem barra final, para os links mágicos e redirects usarem o endereço correto.
 
 ## Integração Kiwify
 
@@ -89,6 +91,7 @@ Variáveis obrigatórias:
 OPENAI_API_KEY=sua_chave
 OPENAI_MODEL=gpt-4o-mini
 OPENAI_WEB_MODEL=gpt-4o-mini
+APP_URL=https://seu-dominio.com
 AUTH_SECRET=um_segredo_longo_para_assinar_sessoes
 AUTH_EMAIL=cliente@exemplo.com
 AUTH_NAME=Cliente

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
+import { getPublicUrl } from "@/lib/public-url";
 
 export async function POST(request: Request) {
-  return NextResponse.redirect(new URL("/login", request.url), { status: 303 });
+  return NextResponse.redirect(getPublicUrl("/login", request), { status: 303 });
 }
