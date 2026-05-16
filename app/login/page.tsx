@@ -11,7 +11,7 @@ type LoginPageProps = {
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {
   const params = await searchParams;
-  const nextPath = params?.next && params.next.startsWith("/") ? params.next : "/chat";
+  const nextPath = params?.next && params.next.startsWith("/") ? params.next : "/personagens";
   const hasInvalidLink = params?.error === "link";
   const linkSent = params?.sent === "1";
 

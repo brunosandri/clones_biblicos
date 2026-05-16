@@ -35,11 +35,11 @@ export async function GET(request: Request) {
 
 function sanitizeNextPath(value: string) {
   if (!value.startsWith("/") || value.startsWith("//")) {
-    return "/chat";
+    return "/personagens";
   }
 
   if (value.startsWith("/api/") || value.startsWith("/login")) {
-    return "/chat";
+    return "/personagens";
   }
 
   return value;

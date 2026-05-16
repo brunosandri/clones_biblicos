@@ -7,7 +7,7 @@ import { getPublicUrl } from "@/lib/public-url";
 export async function POST(request: Request) {
   const formData = await request.formData();
   const email = String(formData.get("email") ?? "");
-  const nextPath = sanitizeNextPath(String(formData.get("next") ?? "/chat"));
+  const nextPath = sanitizeNextPath(String(formData.get("next") ?? "/personagens"));
   const user = await findActiveAccessUserByEmail(email);
   const loginUrl = getPublicUrl("/login", request);
   loginUrl.searchParams.set("sent", "1");
@@ -29,11 +29,11 @@ export async function POST(request: Request) {
 
 function sanitizeNextPath(value: string) {
   if (!value.startsWith("/") || value.startsWith("//")) {
-    return "/chat";
+    return "/personagens";
   }
 
   if (value.startsWith("/api/") || value.startsWith("/login")) {
-    return "/chat";
+    return "/personagens";
   }
 
   return value;

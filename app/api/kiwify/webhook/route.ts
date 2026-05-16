@@ -52,7 +52,7 @@ export async function POST(request: Request) {
         email: parsed.email,
         name: parsed.name ?? parsed.email
       };
-      const token = await createMagicLinkToken(user, "/chat");
+      const token = await createMagicLinkToken(user, "/personagens");
       const magicLink = getPublicUrl("/api/auth/magic-link/verify", request);
       magicLink.searchParams.set("token", token);
 
