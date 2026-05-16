@@ -24,10 +24,9 @@ const outcomes = [
 ];
 
 const offerStack = [
-  "Acesso aos 8 clones bíblicos principais.",
-  "Chat para fazer perguntas pessoais de estudo, sem depender de aulas gravadas.",
-  "Trilha cronológica para entender onde cada personagem entra na história.",
-  "Respostas com referências bíblicas e limites teológicos claros."
+  "Converse com 8 mentores bíblicos.",
+  "Receba respostas com contexto e referências.",
+  "Siga uma trilha cronológica de estudo."
 ];
 
 const mechanisms = [
@@ -103,7 +102,7 @@ export default function HomePage() {
   return (
     <main className="bg-parchment text-ink">
       <section className="relative min-h-[calc(100vh-57px)] overflow-hidden bg-ink text-parchment">
-        <div className="absolute inset-0 opacity-30">
+        <div className="absolute inset-0 opacity-25">
           <Image
             src="/cards/jesus.png"
             alt=""
@@ -113,8 +112,8 @@ export default function HomePage() {
             className="object-cover object-center"
           />
         </div>
-        <div className="absolute inset-0 bg-ink/75" />
-        <div className="absolute inset-y-0 right-0 hidden w-1/2 grid-cols-2 gap-3 p-6 opacity-70 lg:grid">
+        <div className="absolute inset-0 bg-ink/82" />
+        <div className="absolute inset-y-0 right-0 hidden w-[42%] grid-cols-2 gap-3 p-6 opacity-45 xl:grid">
           {characters.slice(0, 6).map((character, index) => (
             <div
               key={character.id}
@@ -126,53 +125,49 @@ export default function HomePage() {
                 src={character.imagePath}
                 alt=""
                 fill
-                sizes="24vw"
-                className="object-cover"
+                sizes="20vw"
+                className="object-cover grayscale"
               />
-              <div className="absolute inset-0 bg-ink/25" />
-              <span className="absolute bottom-3 left-3 text-sm font-semibold text-parchment">
-                {character.name}
-              </span>
+              <div className="absolute inset-0 bg-ink/45" />
             </div>
           ))}
         </div>
 
-        <div className="relative mx-auto flex min-h-[calc(100vh-57px)] max-w-6xl flex-col justify-center px-5 py-14">
-          <div className="max-w-3xl">
+        <div className="relative mx-auto flex min-h-[calc(100vh-57px)] max-w-6xl flex-col justify-center px-5 py-16">
+          <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-gold">
               Assinatura Clones da Bíblia
             </p>
-            <h1 className="mt-5 font-serif text-5xl font-semibold leading-[1.03] text-parchment sm:text-6xl lg:text-7xl">
+            <h1 className="mt-5 font-serif text-4xl font-semibold leading-tight text-parchment sm:text-5xl lg:text-6xl">
               Entenda a Bíblia conversando com quem viveu cada parte da história.
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-parchment/80">
-              Em poucos minutos, escolha um mentor bíblico, faça sua pergunta e receba uma resposta com contexto,
-              referências e aplicação, sem ficar pulando entre vídeos, comentários soltos e respostas genéricas.
+            <p className="mt-6 max-w-xl text-xl leading-8 text-parchment/82">
+              Escolha um personagem, faça sua pergunta e receba uma resposta bíblica com contexto, ordem e aplicação.
             </p>
-            <ul className="mt-6 grid max-w-2xl gap-3 text-sm leading-6 text-parchment/75 sm:grid-cols-2">
+            <ul className="mt-7 grid max-w-xl gap-3 text-base leading-7 text-parchment/78">
               {offerStack.map((item) => (
                 <li key={item} className="flex gap-2">
-                  <Check size={17} className="mt-0.5 shrink-0 text-gold" aria-hidden="true" />
+                  <Check size={19} className="mt-1 shrink-0 text-gold" aria-hidden="true" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="#planos"
-                className="inline-flex items-center justify-center gap-2 rounded bg-gold px-6 py-3 text-sm font-semibold text-ink transition hover:bg-parchment"
+                className="inline-flex items-center justify-center gap-2 rounded bg-gold px-7 py-4 text-base font-semibold text-ink transition hover:bg-parchment"
               >
                 Quero acessar os clones
                 <ArrowRight size={18} aria-hidden="true" />
               </Link>
               <Link
                 href="/login"
-                className="inline-flex items-center justify-center rounded border border-parchment/20 px-6 py-3 text-sm font-semibold text-parchment transition hover:border-gold hover:text-gold"
+                className="inline-flex items-center justify-center rounded border border-parchment/20 px-7 py-4 text-base font-semibold text-parchment transition hover:border-gold hover:text-gold"
               >
                 Já sou assinante
               </Link>
             </div>
-            <div className="mt-8 grid max-w-2xl gap-3 text-sm text-parchment/70 sm:grid-cols-3">
+            <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm text-parchment/68">
               <span className="inline-flex items-center gap-2">
                 <Check size={16} className="text-gold" aria-hidden="true" />
                 8 mentores bíblicos
