@@ -102,36 +102,32 @@ export default function HomePage() {
   return (
     <main className="bg-parchment text-ink">
       <section className="relative min-h-[calc(100vh-57px)] overflow-hidden bg-ink text-parchment">
-        <div className="absolute inset-0 opacity-25">
-          <Image
-            src="/cards/jesus.png"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-        </div>
         <div className="absolute inset-0 bg-ink/82" />
-        <div className="absolute inset-y-0 right-0 hidden w-[42%] grid-cols-2 gap-3 p-6 opacity-45 xl:grid">
-          {characters.slice(0, 6).map((character, index) => (
+        <div className="absolute inset-0 grid grid-cols-2 gap-2 p-2 opacity-40 sm:grid-cols-4 xl:opacity-45">
+          {characters.map((character, index) => (
             <div
               key={character.id}
-              className={`relative overflow-hidden border border-parchment/10 bg-white/5 ${
-                index % 2 === 0 ? "translate-y-8" : "-translate-y-3"
+              className={`relative min-h-0 overflow-hidden border border-parchment/10 bg-white/5 ${
+                index % 2 === 0 ? "translate-y-3" : "-translate-y-2"
               }`}
             >
               <Image
                 src={character.imagePath}
                 alt=""
                 fill
-                sizes="20vw"
+                priority={index < 4}
+                sizes="(min-width: 640px) 25vw, 50vw"
                 className="object-cover grayscale"
               />
-              <div className="absolute inset-0 bg-ink/45" />
+              <div className="absolute inset-0 bg-ink/35" />
+              <span className="absolute bottom-3 left-3 rounded bg-ink/65 px-2 py-1 text-xs font-semibold text-parchment/85 backdrop-blur">
+                {character.name}
+              </span>
             </div>
           ))}
         </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/88 to-ink/58" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-ink/30" />
 
         <div className="relative mx-auto flex min-h-[calc(100vh-57px)] max-w-6xl flex-col justify-center px-5 py-16">
           <div className="max-w-2xl">
