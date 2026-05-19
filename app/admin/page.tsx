@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getAdminStats } from "@/lib/access-store";
 import { SESSION_COOKIE_NAME, getAdminEmails, verifySessionToken } from "@/lib/auth";
 import { UsersTable } from "./UsersTable";
+import { TestEmailButton } from "./TestEmailButton";
 
 export const dynamic = "force-dynamic";
 
@@ -34,12 +35,15 @@ export default async function AdminPage() {
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Painel administrativo</p>
             <h1 className="mt-2 font-serif text-4xl font-semibold">Assinantes</h1>
           </div>
-          <a
-            href="/admin/importar"
-            className="mt-3 rounded bg-gold px-4 py-2 text-sm font-semibold text-ink transition hover:bg-parchment"
-          >
-            Importar usuários
-          </a>
+          <div className="mt-3 flex items-center gap-3">
+            <TestEmailButton />
+            <a
+              href="/admin/importar"
+              className="rounded bg-gold px-4 py-2 text-sm font-semibold text-ink transition hover:bg-parchment"
+            >
+              Importar usuários
+            </a>
+          </div>
         </div>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
