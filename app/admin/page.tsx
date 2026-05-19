@@ -44,8 +44,18 @@ export default async function AdminPage() {
   return (
     <main className="min-h-[calc(100vh-57px)] bg-ink px-4 py-10 text-parchment">
       <div className="mx-auto max-w-7xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Painel administrativo</p>
-        <h1 className="mt-2 font-serif text-4xl font-semibold">Assinantes</h1>
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Painel administrativo</p>
+            <h1 className="mt-2 font-serif text-4xl font-semibold">Assinantes</h1>
+          </div>
+          <a
+            href="/admin/importar"
+            className="mt-3 rounded bg-gold px-4 py-2 text-sm font-semibold text-ink transition hover:bg-parchment"
+          >
+            Importar usuários
+          </a>
+        </div>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
           <div className="rounded-lg border border-parchment/10 bg-white/5 p-5">

@@ -3,7 +3,7 @@ import { upsertKiwifyAccess } from "@/lib/access-store";
 import { createMagicLinkToken } from "@/lib/auth";
 import { sendMagicLinkEmail } from "@/lib/email";
 import { parseKiwifyWebhook } from "@/lib/kiwify";
-import { getPublicUrl } from "@/lib/public-url";
+import { getBase } from "@/lib/public-url";
 
 export function GET() {
   return NextResponse.json({
@@ -52,15 +52,20 @@ export async function POST(request: Request) {
         email: parsed.email,
         name: parsed.name ?? parsed.email
       };
-      const token = await createMagicLinkToken(user, "/personagens");
-      const magicLink = getPublicUrl("/api/auth/magic-link/verify", request);
-      magicLink.searchParams.set("token", token);
 
-      await sendMagicLinkEmail({
-        to: user.email,
-        name: user.name,
-        magicLink: magicLink.toString()
-      });
+      try {
+        const token = await createMagicLinkToken(user, "/personagens");
+        const base = getBase(request);
+        const magicLink = new URL("/api/auth/magic-link/verify", base);
+        magicLink.searchParams.set("token", token);
+        await sendMagicLinkEmail({
+          to: user.email,
+          name: user.name,
+          magicLink: magicLink.toString()
+        });
+      } catch (emailError) {
+        console.error("Erro ao enviar email de boas-vindas", emailError);
+      }
     }
 
     return NextResponse.json({
