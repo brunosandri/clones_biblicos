@@ -1,34 +1,39 @@
 const INTERNAL_HOSTNAMES = new Set(["0.0.0.0", "::", "[::]"]);
 
 export function getPublicUrl(path: string, request: Request) {
-  return new URL(path, getPublicOrigin(request));
+  return new URL(path, getBase(request));
 }
 
-export function getPublicOrigin(request: Request) {
-  const configuredOrigin = normalizeOrigin(
-    process.env.APP_URL ?? process.env.NEXT_PUBLIC_APP_URL ?? process.env.PUBLIC_APP_URL
-  );
-
-  if (configuredOrigin) {
-    return configuredOrigin;
+export function getBase(request: Request): string {
+  if (process.env.APP_URL) {
+    return process.env.APP_URL.replace(/\/$/, "");
   }
 
-  const forwardedHost = request.headers.get("x-forwarded-host");
-  const host = forwardedHost ?? request.headers.get("host");
-  const forwardedProto = request.headers.get("x-forwarded-proto") ?? "https";
+  const proto = request.headers.get("x-forwarded-proto")?.split(",")[0] ?? "https";
+  const fwdHost = request.headers.get("x-forwarded-host")?.split(",")[0];
+
+  if (fwdHost) {
+    return `${proto}://${fwdHost}`;
+  }
+
+  const host = request.headers.get("host");
 
   if (host && !isInternalHost(host)) {
-    return `${forwardedProto.split(",")[0]}://${host.split(",")[0]}`;
+    return `${proto}://${host.split(",")[0]}`;
   }
 
   const railwayDomain = process.env.RAILWAY_PUBLIC_DOMAIN ?? process.env.RAILWAY_STATIC_URL;
 
   if (railwayDomain) {
-    return normalizeOrigin(railwayDomain) ?? `https://${railwayDomain}`;
+    return `https://${railwayDomain.replace(/^https?:\/\//, "")}`;
   }
 
-  const requestOrigin = new URL(request.url).origin;
-  return requestOrigin.replace("://0.0.0.0", "://localhost");
+  return new URL(request.url).origin.replace("://0.0.0.0", "://localhost");
+}
+
+/** @deprecated use getBase */
+export function getPublicOrigin(request: Request): string {
+  return getBase(request);
 }
 
 function normalizeOrigin(value?: string) {

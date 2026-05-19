@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { SESSION_COOKIE_NAME, createSessionToken, getAdminEmails, getSessionMaxAge } from "@/lib/auth";
+import { getBase } from "@/lib/public-url";
 
 export async function POST(request: Request) {
   const formData = await request.formData();
@@ -29,31 +30,4 @@ export async function POST(request: Request) {
   });
 
   return response;
-}
-
-function getBase(request: Request): string {
-  if (process.env.APP_URL) {
-    return process.env.APP_URL.replace(/\/$/, "");
-  }
-
-  const proto = request.headers.get("x-forwarded-proto")?.split(",")[0] ?? "https";
-  const fwdHost = request.headers.get("x-forwarded-host")?.split(",")[0];
-
-  if (fwdHost) {
-    return `${proto}://${fwdHost}`;
-  }
-
-  const host = request.headers.get("host");
-
-  if (host && !host.startsWith("0.0.0.0") && host !== "::") {
-    return `${proto}://${host}`;
-  }
-
-  const railwayDomain = process.env.RAILWAY_PUBLIC_DOMAIN ?? process.env.RAILWAY_STATIC_URL;
-
-  if (railwayDomain) {
-    return `https://${railwayDomain.replace(/^https?:\/\//, "")}`;
-  }
-
-  return new URL(request.url).origin;
 }
