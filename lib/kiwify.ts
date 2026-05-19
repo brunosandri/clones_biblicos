@@ -1,28 +1,41 @@
 const ACTIVE_EVENTS = [
+  "order_approved",
+  "subscription_renewed",
   "compra aprovada",
+  "compra_aprovada",
   "venda aprovada",
+  "venda_aprovada",
   "pagamento aprovado",
+  "pagamento_aprovado",
   "assinatura renovada",
+  "assinatura_renovada",
   "renovada",
   "subscription renewed",
   "order paid",
-  "paid"
+  "paid",
+  "approved"
 ];
 
 const INACTIVE_EVENTS = [
   "reembolso",
   "chargeback",
   "compra recusada",
+  "compra_recusada",
   "pagamento recusado",
+  "pagamento_recusado",
   "assinatura cancelada",
+  "assinatura_cancelada",
   "assinatura atrasada",
+  "assinatura_atrasada",
   "cancelada",
   "atrasada",
   "refunded",
   "canceled",
   "cancelled",
-  "overdue",
-  "chargeback"
+  "order_refunded",
+  "subscription_cancelled",
+  "subscription_canceled",
+  "overdue"
 ];
 
 export type ParsedKiwifyWebhook = {

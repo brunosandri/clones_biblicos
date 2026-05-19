@@ -43,6 +43,14 @@ export function getAuthUsers(): AuthUser[] {
   ];
 }
 
+export function getAdminEmails(): string[] {
+  const raw = process.env.ADMIN_EMAILS ?? process.env.AUTH_EMAIL ?? "";
+  return raw
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+}
+
 export function findAuthUserByEmail(email: string) {
   const normalizedEmail = email.trim().toLowerCase();
   return getAuthUsers().find((user) => user.email === normalizedEmail);

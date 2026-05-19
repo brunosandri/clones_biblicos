@@ -1,4 +1,7 @@
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { recordChatUsage } from "@/lib/access-store";
+import { SESSION_COOKIE_NAME, verifySessionToken } from "@/lib/auth";
 import { getCharacterById } from "@/lib/characters";
 import { loadKnowledgeDocuments, loadMasterPrompt, selectKnowledgeDocuments } from "@/lib/knowledge-loader";
 import { createOpenAIClient } from "@/lib/openai";
@@ -30,6 +33,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Personagem nao encontrado." }, { status: 404 });
     }
 
+    const cookieStore = await cookies();
+    const session = await verifySessionToken(cookieStore.get(SESSION_COOKIE_NAME)?.value);
+    const userEmail = session?.email ?? null;
+
     const [masterPrompt, knowledgeDocuments] = await Promise.all([
       loadMasterPrompt(character),
       loadKnowledgeDocuments()
@@ -52,8 +59,9 @@ export async function POST(request: Request) {
     const openai = createOpenAIClient();
 
     if (shouldUseExternalSources) {
+      const model = process.env.OPENAI_WEB_MODEL ?? process.env.OPENAI_MODEL ?? "gpt-4o-mini";
       const response = await openai.responses.create({
-        model: process.env.OPENAI_WEB_MODEL ?? process.env.OPENAI_MODEL ?? "gpt-4o-mini",
+        model,
         tools: [
           {
             type: "web_search",
@@ -69,13 +77,26 @@ export async function POST(request: Request) {
         input: prompt
       });
 
+      const usage = response.usage as { input_tokens?: number; output_tokens?: number; total_tokens?: number } | undefined;
+
+      await recordChatUsage({
+        email: userEmail,
+        characterId: body.characterId,
+        promptTokens: usage?.input_tokens ?? 0,
+        completionTokens: usage?.output_tokens ?? 0,
+        totalTokens: usage?.total_tokens ?? (usage?.input_tokens ?? 0) + (usage?.output_tokens ?? 0),
+        model,
+        usedWebSearch: true
+      });
+
       return NextResponse.json({
         answer: response.output_text ?? "Nao foi possivel gerar uma resposta com fontes externas."
       });
     }
 
+    const model = process.env.OPENAI_MODEL ?? "gpt-4o-mini";
     const completion = await openai.chat.completions.create({
-      model: process.env.OPENAI_MODEL ?? "gpt-4o-mini",
+      model,
       temperature: 0.4,
       messages: [
         {
@@ -90,6 +111,16 @@ export async function POST(request: Request) {
           content: prompt
         }
       ]
+    });
+
+    await recordChatUsage({
+      email: userEmail,
+      characterId: body.characterId,
+      promptTokens: completion.usage?.prompt_tokens ?? 0,
+      completionTokens: completion.usage?.completion_tokens ?? 0,
+      totalTokens: completion.usage?.total_tokens ?? 0,
+      model,
+      usedWebSearch: false
     });
 
     return NextResponse.json({

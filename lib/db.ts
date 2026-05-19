@@ -48,6 +48,20 @@ export async function ensureAccessTables() {
       payload jsonb not null,
       created_at timestamptz not null default now()
     );
+
+    create table if not exists chat_usage (
+      id bigserial primary key,
+      email text,
+      character_id text,
+      prompt_tokens int not null default 0,
+      completion_tokens int not null default 0,
+      total_tokens int not null default 0,
+      model text,
+      used_web_search boolean not null default false,
+      created_at timestamptz not null default now()
+    );
+
+    create index if not exists chat_usage_email_idx on chat_usage (email);
   `);
 
   return true;

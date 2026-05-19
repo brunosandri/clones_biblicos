@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { LogoMark } from "@/components/LogoMark";
 import {
   AlertTriangle,
   ArrowRight,
@@ -131,6 +132,7 @@ export default function HomePage() {
 
         <div className="relative mx-auto flex min-h-[calc(100vh-57px)] max-w-6xl flex-col justify-center px-5 py-16">
           <div className="max-w-2xl">
+            <LogoMark className="mb-7 h-14 w-auto" />
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-gold">
               Assinatura Clones da Bíblia
             </p>

@@ -1,6 +1,85 @@
 import { getAuthUsers } from "@/lib/auth";
 import { ensureAccessTables, getPool } from "@/lib/db";
 
+export type ChatUsageInput = {
+  email: string | null;
+  characterId: string;
+  promptTokens: number;
+  completionTokens: number;
+  totalTokens: number;
+  model: string;
+  usedWebSearch: boolean;
+};
+
+export async function recordChatUsage({
+  email,
+  characterId,
+  promptTokens,
+  completionTokens,
+  totalTokens,
+  model,
+  usedWebSearch
+}: ChatUsageInput) {
+  const database = getPool();
+
+  if (!database) return;
+
+  try {
+    await database.query(
+      `insert into chat_usage (email, character_id, prompt_tokens, completion_tokens, total_tokens, model, used_web_search)
+       values ($1, $2, $3, $4, $5, $6, $7)`,
+      [email, characterId, promptTokens, completionTokens, totalTokens, model, usedWebSearch]
+    );
+  } catch (error) {
+    console.error("Falha ao registrar uso do chat", error);
+  }
+}
+
+export type AdminUserStat = {
+  email: string;
+  name: string;
+  status: string;
+  plan: string | null;
+  access_expires_at: Date | null;
+  created_at: Date;
+  last_event: string | null;
+  message_count: number;
+  total_tokens: number;
+  prompt_tokens: number;
+  completion_tokens: number;
+  last_active: Date | null;
+};
+
+export async function getAdminStats(): Promise<AdminUserStat[]> {
+  const database = getPool();
+
+  if (!database) return [];
+
+  await ensureAccessTables();
+
+  const result = await database.query<AdminUserStat>(`
+    select
+      u.email,
+      coalesce(u.name, u.email) as name,
+      u.status,
+      u.plan,
+      u.access_expires_at,
+      u.created_at,
+      u.last_event,
+      coalesce(sum(c.total_tokens)::int, 0) as total_tokens,
+      coalesce(sum(c.prompt_tokens)::int, 0) as prompt_tokens,
+      coalesce(sum(c.completion_tokens)::int, 0) as completion_tokens,
+      count(c.id)::int as message_count,
+      max(c.created_at) as last_active
+    from user_access u
+    left join chat_usage c on c.email = u.email
+    group by u.email, u.name, u.status, u.plan, u.access_expires_at, u.created_at, u.last_event
+    order by total_tokens desc nulls last, u.created_at desc
+  `);
+
+  return result.rows;
+}
+
 export type AccessUser = {
   email: string;
   name: string;
